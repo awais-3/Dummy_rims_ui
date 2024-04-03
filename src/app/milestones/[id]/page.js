@@ -3,8 +3,8 @@ import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import { useParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Navbar from "@/app/Components/Navbar/navbar";
-import MilestoneDetails from "@/app/Components/Milestone/EditMilestone/MilestoneDetails";
+import Navbar from "../../Components/Navbar/navbar";
+import MilestoneDetails from "../../Components/Milestone/EditMilestone/MilestoneDetails";
 
 export default function Page() {
   const { id } = useParams();
