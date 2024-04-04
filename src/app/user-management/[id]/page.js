@@ -4,7 +4,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Navbar from "../../Components/Navbar/navbar";
-import UserManagementDetails from "../../Components/UserManagment/EditContact/UserManagementDetails";
+import UserManagementDetails from "../../Components/UserManagment/EditUserManagement/UserManagementDetails";
 
 export default function Page() {
   const { id } = useParams();

@@ -113,7 +113,7 @@ const ProductForm = ({ isEditing = false, product = {}, type }) => {
         bottom={4}
         right={5}
       >
-        {isEditing ? "Update" : "Next"}
+        {isEditing ? "Update" : "Create"}
       </Button>
     </Box>
   );

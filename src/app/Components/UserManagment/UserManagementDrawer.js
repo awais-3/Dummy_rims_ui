@@ -12,8 +12,14 @@ import {
   Box,
   Divider,
 } from "@chakra-ui/react";
+import UserManagementForm from "./UserManagementForm";
 
-export default function UserManagementDrawer({ isOpen, onClose }) {
+export default function UserManagementDrawer({
+  isOpen,
+  onClose,
+  isEditing,
+  user,
+}) {
   return (
     <>
       <Drawer
@@ -33,18 +39,20 @@ export default function UserManagementDrawer({ isOpen, onClose }) {
               <Box color="blue.500" fontSize="16px">
                 User
               </Box>
-              Create New
+              {isEditing ? "Update" : "Create New"}
             </Box>
           </DrawerHeader>
           <Divider borderColor="blue.500" borderWidth={1} bg="blue" />
-          <DrawerBody>{/* <Input pslaceholder="Type here..." /> */}</DrawerBody>
+          <DrawerBody>
+            <UserManagementForm isEditing={isEditing} user={user} />
+          </DrawerBody>
 
           <DrawerFooter
             borderTop={2}
             borderColor={"blue.500"}
             borderStyle={"solid"}
           >
-            <Button variant="outline" mr={"75px"} mt="1" onClick={onClose}>
+            <Button variant="outline" mr={"95px"} mt="1" onClick={onClose}>
               Cancel
             </Button>
           </DrawerFooter>

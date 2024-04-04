@@ -17,7 +17,11 @@ export default function UserManagementCreate() {
         >
           Create
         </Button>
-        <UserManagementDrawer isOpen={isOpen} onClose={onClose} />
+        <UserManagementDrawer
+          isOpen={isOpen}
+          onClose={onClose}
+          isEditing={false}
+        />
       </Box>
     </Box>
   );

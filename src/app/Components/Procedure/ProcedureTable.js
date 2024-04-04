@@ -92,17 +92,20 @@ export default function ProcedureTable() {
                   onChange={handleSelectAll}
                   mr="3"
                 />
-                <span> To convert</span>
+                <span>Procedure Type</span>
               </Th>
-              <Th color="white">into</Th>
-              <Th isNumeric color="white">
-                multiply by
-              </Th>
+              <Th color="white">Product Code</Th>
+              <Th color="white">Product Name</Th>
+              <Th color="white">Generic Name</Th>
+              <Th color="white">Strength</Th>
+              <Th color="white">Pharmaceutical Form</Th>
+              <Th color="white">Pack Size</Th>
+              <Th color="white">Product Type</Th>
+              <Th color="white">Country</Th>
             </Tr>
           </Thead>
           <Tbody>
             {isLoading ? (
-              // Skeleton when loading (unchanged)
               Array.from({ length: pageSize }).map((_, index) => (
                 <Tr key={index} w="full">
                   <Td>
@@ -110,6 +113,24 @@ export default function ProcedureTable() {
                       <Skeleton height="15px" width="15px" />
                       <Skeleton height="15px" width="full" />
                     </Box>
+                  </Td>
+                  <Td>
+                    <Skeleton height="15px" width="full" />
+                  </Td>
+                  <Td>
+                    <Skeleton height="15px" width="full" />
+                  </Td>
+                  <Td>
+                    <Skeleton height="15px" width="full" />
+                  </Td>
+                  <Td>
+                    <Skeleton height="15px" width="full" />
+                  </Td>
+                  <Td>
+                    <Skeleton height="15px" width="full" />
+                  </Td>
+                  <Td>
+                    <Skeleton height="15px" width="full" />
                   </Td>
                   <Td>
                     <Skeleton height="15px" width="full" />
@@ -137,20 +158,26 @@ export default function ProcedureTable() {
                       mt="1"
                       mr="3"
                     />
-                    <Link href={`/procedures/${1}`}>
+                    <Link href={`/procedures/${item.id}`}>
                       <Box
-                        as="spam"
+                        as="span"
                         _hover={{
                           textDecoration: "underline",
                           color: "blue.500",
                         }}
                       >
-                        {item.from}
+                        {item.procedureType}
                       </Box>
                     </Link>
                   </Td>
-                  <Td>{item.to}</Td>
-                  <Td isNumeric>{item.multiplyBy}</Td>
+                  <Td>{item.productCode}</Td>
+                  <Td>{item.productName}</Td>
+                  <Td>{item.genericName}</Td>
+                  <Td>{item.strength}</Td>
+                  <Td>{item.pharmaceuticalForm}</Td>
+                  <Td>{item.packSize}</Td>
+                  <Td>{item.productType}</Td>
+                  <Td>{item.country}</Td>
                 </Tr>
               ))
             )}

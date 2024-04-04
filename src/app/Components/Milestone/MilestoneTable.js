@@ -23,7 +23,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import TablePagination from "../Common/TablePagination";
 
 export default function MilestoneTable() {
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalProcedure, setTotalProcedure] = useState(
     MilestoneListData?.length

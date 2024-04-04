@@ -2,35 +2,30 @@
 import { useForm } from "react-hook-form";
 import { Button, Box } from "@chakra-ui/react";
 import FormSubHeder from "../Common/FormSubHeder";
-
-import { partnerFormFields } from "../../assets/Data";
 import GenericInput from "../Common/Inputs/Input";
+import { userFormFields } from "../../assets/Data";
 import { useEffect } from "react";
 
-function ClientForm({ client, isEditing }) {
+function UserManagementForm({ user, isEditing }) {
   const {
     register,
     handleSubmit,
     setValue,
     clearErrors,
-    watch,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    Object.entries(user).map(([sectionName, sectionData]) =>
+      Object.entries(sectionData).map(([fieldName, fieldValue]) => {
+        setValue(fieldName, fieldValue);
+      })
+    );
+  }, [isEditing, user]);
 
   const onSubmit = (data) => {
     console.log(data);
   };
-
-  useEffect(() => {
-    if (isEditing && client) {
-      console.log(client);
-      Object.entries(client).forEach(([fieldName, value]) => {
-        if (value !== undefined) {
-          setValue(fieldName, value);
-        }
-      });
-    }
-  }, [isEditing, client]);
 
   return (
     <Box
@@ -38,7 +33,7 @@ function ClientForm({ client, isEditing }) {
       onSubmit={handleSubmit(onSubmit)}
       px={{ base: 2, md: 6, lg: 12 }}
     >
-      {partnerFormFields.map((section, index) => (
+      {userFormFields.map((section, index) => (
         <div key={index}>
           <FormSubHeder heading={section?.sectionName} />
           {section.fields.map((field) => (
@@ -54,7 +49,11 @@ function ClientForm({ client, isEditing }) {
               clearErrors={clearErrors}
               isRequired={field.isRequired || false}
               isMulti={field.isMulti || false}
-              defaultValue={isEditing && client ? client[field.name] : null}
+              defaultValue={
+                isEditing && user
+                  ? user[section?.sectionName][field.name]
+                  : null
+              }
             />
           ))}
         </div>
@@ -67,10 +66,10 @@ function ClientForm({ client, isEditing }) {
         bottom={4}
         right={5}
       >
-        {isEditing ? "Update" : "Create"}
+        {!isEditing ? "Create" : "Update"}
       </Button>
     </Box>
   );
 }
 
-export default ClientForm;
+export default UserManagementForm;

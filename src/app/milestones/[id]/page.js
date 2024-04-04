@@ -3,8 +3,8 @@ import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import { useParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Navbar from "../../Components/Navbar/navbar";
-import MilestoneDetails from "../../Components/Milestone/EditMilestone/MilestoneDetails";
+import Navbar from "@/app/Components/Navbar/navbar";
+import MilestoneDetails from "@/app/Components/Milestone/EditMilestone/MilestoneDetails";
 
 export default function Page() {
   const { id } = useParams();
@@ -25,9 +25,16 @@ export default function Page() {
   return (
     <Box h="100vh">
       <Navbar />
-      <Box display="flex" h="91vh">
+      <Box
+        display="flex"
+        flexDirection={{ base: "column", md: "row" }}
+        minHeight={{ base: "auto", md: "91vh" }}
+      >
         {/* Sidebar */}
-        <Box bg="gray.200" w="20%">
+        <Box
+          bg={{ base: "white", md: "gray.200" }}
+          w={{ base: "100%", md: "20%" }}
+        >
           <Tabs
             isFitted
             flexDirection="column"
@@ -56,7 +63,7 @@ export default function Page() {
         </Box>
 
         {/* Main Content */}
-        <Box flex="1" p="4">
+        <Box flex={{ base: "", md: 1 }} p="4">
           <Tabs index={currentFilter === "Project Details" ? 0 : 1}>
             <TabPanels>
               <TabPanel>

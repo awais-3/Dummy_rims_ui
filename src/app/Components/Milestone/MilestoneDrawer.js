@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import MilestoneForm from "./MilestoneForm";
 
-export default function MilestoneDrawer({ isOpen, onClose }) {
+export default function MilestoneDrawer({ isOpen, onClose, type, isEditing }) {
   return (
     <>
       <Drawer
@@ -33,15 +33,15 @@ export default function MilestoneDrawer({ isOpen, onClose }) {
             <DrawerCloseButton />
             <Box display="flex " flexDir={"column"}>
               <Box color="blue.500" fontSize="16px">
-                Milestone
+                {type}
               </Box>
-              Create New
+              {isEditing ? "Update" : "Create New"}
             </Box>
           </DrawerHeader>
           <Divider borderColor="blue.500" borderWidth={1} bg="blue" />
 
           <DrawerBody>
-            <MilestoneForm />
+            <MilestoneForm type={type} />
           </DrawerBody>
 
           <DrawerFooter
@@ -49,7 +49,7 @@ export default function MilestoneDrawer({ isOpen, onClose }) {
             borderColor={"blue.500"}
             borderStyle={"solid"}
           >
-            <Button variant="outline" mr={"75px"} mt="1" onClick={onClose}>
+            <Button variant="outline" mr={"95px"} mt="1" onClick={onClose}>
               Cancel
             </Button>
           </DrawerFooter>

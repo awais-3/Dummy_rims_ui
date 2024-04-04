@@ -25,6 +25,7 @@ export default function GenericInput({
   isMulti,
   defaultValue,
 }) {
+  console.log(defaultValue);
   const handleCheckboxChange = (e) => {
     setValue(name, e.target.checked);
     clearErrors(name);
@@ -35,7 +36,7 @@ export default function GenericInput({
       <FormLabel htmlFor={name}>{label}</FormLabel>
       {type === "select" ? (
         <Select
-          options={options}
+          options={options || []}
           {...register(name, { required: true })}
           onChange={(selectedOption) => {
             setValue(name, selectedOption?.value);
@@ -52,7 +53,10 @@ export default function GenericInput({
                 })
               : null
           }
-          defaultInputValue={Array.isArray(defaultValue) ? null : defaultValue}
+          {...(!Array.isArray(defaultValue) &&
+            defaultValue && {
+              defaultInputValue: defaultValue,
+            })}
         />
       ) : type === "uneditable" ? (
         <Input

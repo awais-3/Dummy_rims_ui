@@ -1,6 +1,6 @@
+"use client";
 import { useForm } from "react-hook-form";
-import { Button, Box } from "@chakra-ui/react";
-
+import { Button, Box, Select, FormLabel } from "@chakra-ui/react";
 import GenericInput from "../Common/Inputs/Input";
 import {
   parentProcedureFormFields,
@@ -8,7 +8,7 @@ import {
   renewalProcedureFormFields,
 } from "../../assets/Data";
 import FormSubHeder from "../Common/FormSubHeder";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 function ProcedureForm({ type, isEditing = false, procedure = {} }) {
   const {
     register,
@@ -17,6 +17,8 @@ function ProcedureForm({ type, isEditing = false, procedure = {} }) {
     clearErrors,
     formState: { errors },
   } = useForm();
+
+  const [selectedTemplate, setSelectedTemplate] = React.useState(null);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -45,6 +47,12 @@ function ProcedureForm({ type, isEditing = false, procedure = {} }) {
         }
       });
     }
+
+    Object.entries(procedure).map(([sectionName, sectionData]) =>
+      Object.entries(sectionData).map(([fieldName, fieldValue]) => {
+        setValue(fieldName, fieldValue);
+      })
+    );
   }, [isEditing, procedure, type]);
 
   return (
@@ -72,7 +80,9 @@ function ProcedureForm({ type, isEditing = false, procedure = {} }) {
                   isRequired={field.isRequired || false}
                   isMulti={field.isMulti || false}
                   defaultValue={
-                    isEditing && procedure ? procedure[field.name] : null
+                    isEditing && procedure
+                      ? procedure[section?.sectionName][field.name]
+                      : null
                   }
                 />
               ))}
@@ -83,29 +93,46 @@ function ProcedureForm({ type, isEditing = false, procedure = {} }) {
 
       {type === "New" && (
         <>
-          {newProcedureFormFields.map((section, index) => (
-            <div key={index}>
-              <FormSubHeder heading={section?.sectionName} />
-              {section.fields.map((field) => (
-                <GenericInput
-                  key={field.name}
-                  label={field.label}
-                  name={field.name}
-                  options={field.options || []}
-                  type={field.type}
-                  errors={errors}
-                  setValue={setValue}
-                  register={register}
-                  clearErrors={clearErrors}
-                  isRequired={field.isRequired || false}
-                  isMulti={field.isMulti || false}
-                  defaultValue={
-                    isEditing && procedure ? procedure[field.name] : null
-                  }
-                />
+          {selectedTemplate ? (
+            <>
+              {newProcedureFormFields.map((section, index) => (
+                <div key={index}>
+                  <FormSubHeder heading={section?.sectionName} />
+                  {section.fields.map((field) => (
+                    <GenericInput
+                      key={field.name}
+                      label={field.label}
+                      name={field.name}
+                      options={field.options || []}
+                      type={field.type}
+                      errors={errors}
+                      setValue={setValue}
+                      register={register}
+                      clearErrors={clearErrors}
+                      isRequired={field.isRequired || false}
+                      isMulti={field.isMulti || false}
+                      defaultValue={
+                        isEditing && procedure
+                          ? procedure[section?.sectionName][field.name]
+                          : null
+                      }
+                    />
+                  ))}
+                </div>
               ))}
-            </div>
-          ))}
+            </>
+          ) : (
+            <Box mt={4}>
+              <FormLabel>Select Template</FormLabel>
+              <Select
+                placeholder="Select Template"
+                onChange={(e) => setSelectedTemplate(e.target.value)}
+              >
+                <option value="template1">Template 1</option>
+                <option value="template2">Template 2</option>
+              </Select>
+            </Box>
+          )}
         </>
       )}
 
@@ -128,7 +155,9 @@ function ProcedureForm({ type, isEditing = false, procedure = {} }) {
                   isRequired={field.isRequired || false}
                   isMulti={field.isMulti || false}
                   defaultValue={
-                    isEditing && procedure ? procedure[field.name] : null
+                    isEditing && procedure
+                      ? procedure[section?.sectionName][field.name]
+                      : null
                   }
                 />
               ))}
@@ -144,7 +173,7 @@ function ProcedureForm({ type, isEditing = false, procedure = {} }) {
         bottom={4}
         right={5}
       >
-        {isEditing ? "Update" : "Next"}
+        {isEditing ? "Update" : "Create"}
       </Button>
     </Box>
   );

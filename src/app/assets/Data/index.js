@@ -1261,6 +1261,15 @@ export const partnerFormFields = [
   },
 ];
 
+const userRoleOptions = [
+  { value: "Admin", label: "Admin" },
+  { value: "Regulatory Manager", label: "Regulatory Manager" },
+  { value: "Regulatory Department", label: "Regulatory Department" },
+  { value: "EPS other departments", label: "EPS other departments" },
+  { value: "EPS colleagues Africa", label: "EPS colleagues Africa" },
+  { value: "Partners/Clients", label: "Partners/Clients" },
+];
+
 export const userFormFields = [
   {
     sectionName: "User Information",
@@ -1276,7 +1285,7 @@ export const userFormFields = [
         label: "Role",
         name: "role",
         type: "select",
-        options: [],
+        options: userRoleOptions || [],
         isRequired: true,
         defaultValue: null,
       },
@@ -1319,3 +1328,25 @@ formBuilderFields[0].fields.unshift({
   type: "input",
   isRequired: true,
 });
+
+// Milestone Template Fields
+export const milestoneTemplateFormFields = [
+  {
+    sectionName: "General Information",
+    fields: [
+      {
+        label: "Template Name",
+        name: "milstoneName",
+        type: "input",
+        isRequired: true,
+      },
+      {
+        label: "Template Type",
+        name: "templateType",
+        type: "select",
+        options: [],
+        isRequired: true,
+      },
+    ],
+  },
+];

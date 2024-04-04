@@ -292,7 +292,7 @@ function ContactForm({ isEditing, contact }) {
         bottom={4}
         right={5}
       >
-        {isEditing ? "Update" : "Next"}
+        {isEditing ? "Update" : "Create"}
       </Button>
     </Box>
   );

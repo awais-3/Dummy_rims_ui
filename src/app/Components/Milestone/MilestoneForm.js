@@ -4,10 +4,13 @@ import { Button, Box } from "@chakra-ui/react";
 import FormSubHeder from "../Common/FormSubHeder";
 import { useEffect } from "react";
 
-import { milestoneFormFields } from "../../assets/Data/index";
+import {
+  milestoneFormFields,
+  milestoneTemplateFormFields,
+} from "../../assets/Data/index";
 import GenericInput from "../Common/Inputs/Input";
 
-function MilestoneForm({}) {
+function MilestoneForm({ type }) {
   const {
     register,
     handleSubmit,
@@ -26,27 +29,57 @@ function MilestoneForm({}) {
       onSubmit={handleSubmit(onSubmit)}
       px={{ base: 2, md: 6, lg: 12 }}
     >
-      {milestoneFormFields.map((section, index) => (
-        <div key={index}>
-          <FormSubHeder heading={section?.sectionName} />
-          {section.fields.map((field) => (
-            <GenericInput
-              key={field.name}
-              label={field.label}
-              name={field.name}
-              options={field.options || []}
-              type={field.type}
-              errors={errors}
-              setValue={setValue}
-              register={register}
-              clearErrors={clearErrors}
-              isRequired={field.isRequired || false}
-              isMulti={field.isMulti || false}
-              defaultValue={null}
-            />
+      {type === "Milestone" && (
+        <>
+          {milestoneFormFields.map((section, index) => (
+            <div key={index}>
+              <FormSubHeder heading={section?.sectionName} />
+              {section.fields.map((field) => (
+                <GenericInput
+                  key={field.name}
+                  label={field.label}
+                  name={field.name}
+                  options={field.options || []}
+                  type={field.type}
+                  errors={errors}
+                  setValue={setValue}
+                  register={register}
+                  clearErrors={clearErrors}
+                  isRequired={field.isRequired || false}
+                  isMulti={field.isMulti || false}
+                  defaultValue={null}
+                />
+              ))}
+            </div>
           ))}
-        </div>
-      ))}
+        </>
+      )}
+
+      {type === "Milestone Template" && (
+        <>
+          {milestoneTemplateFormFields.map((section, index) => (
+            <div key={index}>
+              <FormSubHeder heading={section?.sectionName} />
+              {section.fields.map((field) => (
+                <GenericInput
+                  key={field.name}
+                  label={field.label}
+                  name={field.name}
+                  options={field.options || []}
+                  type={field.type}
+                  errors={errors}
+                  setValue={setValue}
+                  register={register}
+                  clearErrors={clearErrors}
+                  isRequired={field.isRequired || false}
+                  isMulti={field.isMulti || false}
+                  defaultValue={null}
+                />
+              ))}
+            </div>
+          ))}
+        </>
+      )}
 
       <Button
         colorScheme={"blue"}
@@ -55,7 +88,7 @@ function MilestoneForm({}) {
         bottom={4}
         right={5}
       >
-        Next
+        Create
       </Button>
     </Box>
   );

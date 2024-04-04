@@ -19,19 +19,39 @@ import MilestoneDrawer from "./MilestoneDrawer";
 export default function MilestoneCreate() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const [selectedMenuItem, setSelectedMenuItem] = React.useState(null);
+
+  const handleMenuItemClick = (menuItem) => {
+    setSelectedMenuItem(menuItem);
+    onOpen();
+  };
+
   return (
     <Box>
       <Box display="flex" justifyContent="end">
-        <Button
-          as={Button}
-          colorScheme={"blue"}
-          leftIcon={<IoMdAddCircleOutline />}
-          onClick={onOpen}
-        >
-          Create
-        </Button>
+        <Menu>
+          <MenuButton
+            as={Button}
+            colorScheme={"blue"}
+            leftIcon={<IoMdAddCircleOutline />}
+          >
+            Create
+          </MenuButton>
+          <MenuList>
+            <MenuItem onClick={() => handleMenuItemClick("Milestone Template")}>
+              Milestone Template
+            </MenuItem>
+            <MenuItem onClick={() => handleMenuItemClick("Milestone")}>
+              Milestone
+            </MenuItem>
+          </MenuList>
+        </Menu>
 
-        <MilestoneDrawer isOpen={isOpen} onClose={onClose} />
+        <MilestoneDrawer
+          isOpen={isOpen}
+          onClose={onClose}
+          type={selectedMenuItem}
+        />
       </Box>
     </Box>
   );

@@ -55,7 +55,7 @@ function FormBuilderForm({}) {
         bottom={4}
         right={5}
       >
-        Next
+        Create
       </Button>
     </Box>
   );
