@@ -49,7 +49,7 @@ export default function FormBuilderDrawer({ isOpen, onClose }) {
             borderColor={"blue.500"}
             borderStyle={"solid"}
           >
-            <Button variant="outline" mr={"75px"} mt="1" onClick={onClose}>
+            <Button variant="outline" mr={"95px"} mt="1" onClick={onClose}>
               Cancel
             </Button>
           </DrawerFooter>

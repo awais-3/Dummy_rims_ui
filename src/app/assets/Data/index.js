@@ -893,13 +893,6 @@ export const milestoneFormFields = [
     sectionName: "General Information",
     fields: [
       {
-        label: "Milstone Name",
-        name: "milstoneName",
-        type: "input",
-        isRequired: true,
-      },
-
-      {
         label: "CPP Requested",
         name: "cppRequested",
         type: "checkbox",
@@ -1322,27 +1315,20 @@ newProcedureFormFields.forEach((section) => {
   formBuilderFields.push(obj);
 });
 
-formBuilderFields[0].fields.unshift({
-  label: "Builder Name",
-  name: "builderName",
-  type: "input",
-  isRequired: true,
-});
-
 // Milestone Template Fields
 export const milestoneTemplateFormFields = [
   {
-    sectionName: "General Information",
+    sectionName: "",
     fields: [
       {
-        label: "Template Name",
-        name: "milstoneName",
+        label: "Milestone Name",
+        name: "milestoneName",
         type: "input",
         isRequired: true,
       },
       {
-        label: "Template Type",
-        name: "templateType",
+        label: "Milestone Type",
+        name: "milestoneType",
         type: "select",
         options: [],
         isRequired: true,

@@ -1,5 +1,12 @@
 import { useForm } from "react-hook-form";
-import { Button, Box } from "@chakra-ui/react";
+import {
+  Button,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+} from "@chakra-ui/react";
 
 import FormSubHeder from "../Common/FormSubHeder";
 
@@ -26,6 +33,18 @@ function FormBuilderForm({}) {
       onSubmit={handleSubmit(onSubmit)}
       px={{ base: 2, md: 6, lg: 12 }}
     >
+      <FormControl isInvalid={errors["templateName"]} my="4">
+        <FormLabel htmlFor="templateName">Template name</FormLabel>
+        <Input
+          id={`templateName`}
+          type="text"
+          placeholder="Template name"
+          {...register(`templateName`, { required: true })}
+        />
+        <FormErrorMessage>
+          {errors["templateName"]?.message || "This field is required"}
+        </FormErrorMessage>
+      </FormControl>
       {formBuilderFields.map((section, index) => (
         <div key={index}>
           <FormSubHeder heading={section?.sectionName} />

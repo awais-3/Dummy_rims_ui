@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 
 export default function FormSubHeder({ heading }) {
-  return (
+  return heading ? (
     <Box
       fontSize={{ base: "20px", md: "24px", lg: "26px" }}
       fontWeight="500"
@@ -17,5 +17,7 @@ export default function FormSubHeder({ heading }) {
         *
       </Box>
     </Box>
+  ) : (
+    <Box mt={4}></Box>
   );
 }

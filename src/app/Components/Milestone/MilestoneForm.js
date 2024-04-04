@@ -1,5 +1,12 @@
 import { useForm } from "react-hook-form";
-import { Button, Box } from "@chakra-ui/react";
+import {
+  Button,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+} from "@chakra-ui/react";
 
 import FormSubHeder from "../Common/FormSubHeder";
 import { useEffect } from "react";
@@ -29,8 +36,20 @@ function MilestoneForm({ type }) {
       onSubmit={handleSubmit(onSubmit)}
       px={{ base: 2, md: 6, lg: 12 }}
     >
-      {type === "Milestone" && (
+      {type === "Milestone Template" && (
         <>
+          <FormControl isInvalid={errors["milstoneName"]} my="4">
+            <FormLabel htmlFor="milstoneName">Milstone Name</FormLabel>
+            <Input
+              id={`milstoneName`}
+              type="text"
+              placeholder="Milestone name"
+              {...register(`milstoneName`, { required: true })}
+            />
+            <FormErrorMessage>
+              {errors["milstoneName"]?.message || "This field is required"}
+            </FormErrorMessage>
+          </FormControl>
           {milestoneFormFields.map((section, index) => (
             <div key={index}>
               <FormSubHeder heading={section?.sectionName} />
@@ -55,7 +74,7 @@ function MilestoneForm({ type }) {
         </>
       )}
 
-      {type === "Milestone Template" && (
+      {type === "Milestone" && (
         <>
           {milestoneTemplateFormFields.map((section, index) => (
             <div key={index}>
