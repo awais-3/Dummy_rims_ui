@@ -15,11 +15,13 @@ function UserManagementForm({ user, isEditing }) {
   } = useForm();
 
   useEffect(() => {
-    Object.entries(user).map(([sectionName, sectionData]) =>
-      Object.entries(sectionData).map(([fieldName, fieldValue]) => {
-        setValue(fieldName, fieldValue);
-      })
-    );
+    if (isEditing && user) {
+      Object.entries(user).map(([sectionName, sectionData]) =>
+        Object.entries(sectionData).map(([fieldName, fieldValue]) => {
+          setValue(fieldName, fieldValue);
+        })
+      );
+    }
   }, [isEditing, user]);
 
   const onSubmit = (data) => {
