@@ -24,11 +24,11 @@ function ClientForm({ client, isEditing }) {
   useEffect(() => {
     if (isEditing && client) {
       console.log(client);
-      Object.entries(client).forEach(([fieldName, value]) => {
-        if (value !== undefined) {
-          setValue(fieldName, value);
-        }
-      });
+      Object.entries(client).map(([sectionName, sectionData]) =>
+        Object.entries(sectionData).map(([fieldName, fieldValue]) => {
+          setValue(fieldName, fieldValue);
+        })
+      );
     }
   }, [isEditing, client]);
 

@@ -361,10 +361,10 @@ const NAV_ITEMS = [
   {
     label: "Admin",
     children: [
-      {
-        label: "Partners",
-        href: "/partners",
-      },
+      // {
+      //   label: "Partners",
+      //   href: "/partners",
+      // },
       {
         label: "User Managment",
         href: "/user-management",

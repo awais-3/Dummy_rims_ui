@@ -4,7 +4,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Navbar from "../../Components/Navbar/navbar";
-import ContactDetails from "../../Components/Contact/EditContact/ContactDetails";
+import ClientDetails from "../../Components/Client/EditClient/ClientDetails";
 
 export default function Page() {
   const { id } = useParams();
@@ -19,7 +19,7 @@ export default function Page() {
     setCurrentFilter(newFilter);
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set("current_filter", newFilter);
-    router.push(`/products/1/?${newSearchParams.toString()}`);
+    router.push(`/milestones/1/?${newSearchParams.toString()}`);
   };
 
   return (
@@ -49,7 +49,7 @@ export default function Page() {
                 _selected={{ color: "white", bg: "blue.500" }}
                 py="4"
               >
-                Milestone Details
+                Contact Details
               </Tab>
               {/* <Tab
                 value="Document"
@@ -67,7 +67,7 @@ export default function Page() {
           <Tabs index={currentFilter === "Project Details" ? 0 : 1}>
             <TabPanels>
               <TabPanel>
-                <ContactDetails />
+                <ClientDetails />
               </TabPanel>
             </TabPanels>
           </Tabs>

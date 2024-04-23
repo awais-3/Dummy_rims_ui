@@ -1,19 +1,20 @@
+import { Box, Input } from "@chakra-ui/react";
 import React from "react";
 import Navbar from "../Components/Navbar/navbar";
-import MilestoneCreate from "../Components/Milestone/MilestoneCreate";
-import MilestoneTable from "../Components/Milestone/MilestoneTable";
-import { Box } from "@chakra-ui/react";
-import ContactCreate from "../Components/Contact/ContactCreate";
-import ContactTable from "../Components/Contact/ContactTable";
+import ClientSidebar from "../Components/Client/ClientSidebar";
+import ClientCreate from "../Components/Client/ClientCreate";
+import ClientSearchBar from "../Components/Client/ClientSearchBar";
+import ClientTable from "../Components/Client/ClientTable";
 
-export default function page() {
+export default function Procedure() {
   return (
-    <div>
+    <Box display="flex" flexDirection="column" minH="100vh">
       <Navbar />
-      <Box p="4">
-        <ContactCreate />
-        <ContactTable />
-      </Box>
-    </div>
+      <ClientSidebar>
+        <ClientCreate />
+        <ClientSearchBar />
+        <ClientTable />
+      </ClientSidebar>
+    </Box>
   );
 }

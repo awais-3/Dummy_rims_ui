@@ -7,7 +7,7 @@ export default function UserManagementSearchBar() {
       <Flex gap="4">
         <Input placeholder="Search by name" />
         <Button colorScheme="blue" variant={"outline"}>
-          Searchs
+          Search
         </Button>
       </Flex>
 

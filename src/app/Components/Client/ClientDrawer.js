@@ -24,7 +24,7 @@ export default function ClientDrawer({ isOpen, onClose, isEditing, client }) {
           <DrawerHeader py="2">
             <Box display="flex " flexDir={"column"}>
               <Box color="blue.500" fontSize="16px">
-                Client
+                Contact
               </Box>
               {isEditing ? "Update" : "Create"}
             </Box>

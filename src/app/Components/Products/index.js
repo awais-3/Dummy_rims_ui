@@ -55,7 +55,11 @@ export default function Page() {
           }
         >
           <TabList mb="10px">
-            <Tab value="Product" _selected={{ color: "white", bg: "blue.500" }}>
+            <Tab
+              value="Product"
+              _selected={{ color: "white", bg: "blue.500" }}
+              fontStyle={900}
+            >
               Product
             </Tab>
             <Tab value="Parent" _selected={{ color: "white", bg: "blue.500" }}>

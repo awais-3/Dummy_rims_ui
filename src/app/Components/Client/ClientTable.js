@@ -133,7 +133,7 @@ export default function ClientTable() {
                       mt="1"
                       mr="3"
                     />
-                    <Link href={`/partners/${1}`}>
+                    <Link href={`/contacts/${1}`}>
                       <Box
                         as="spam"
                         _hover={{
