@@ -14,13 +14,13 @@ function UserManagementForm({ user, isEditing }) {
     formState: { errors },
   } = useForm();
 
-  // useEffect(() => {
-  //   Object.entries(user).map(([sectionName, sectionData]) =>
-  //     Object.entries(sectionData).map(([fieldName, fieldValue]) => {
-  //       setValue(fieldName, fieldValue);
-  //     })
-  //   );
-  // }, [isEditing, user]);
+  useEffect(() => {
+    Object.entries(user).map(([sectionName, sectionData]) =>
+      Object.entries(sectionData).map(([fieldName, fieldValue]) => {
+        setValue(fieldName, fieldValue);
+      })
+    );
+  }, [isEditing, user]);
 
   const onSubmit = (data) => {
     console.log(data);

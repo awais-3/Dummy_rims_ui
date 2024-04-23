@@ -23,7 +23,6 @@ function ClientForm({ client, isEditing }) {
 
   useEffect(() => {
     if (isEditing && client) {
-      console.log(client);
       Object.entries(client).map(([sectionName, sectionData]) =>
         Object.entries(sectionData).map(([fieldName, fieldValue]) => {
           setValue(fieldName, fieldValue);
@@ -54,7 +53,11 @@ function ClientForm({ client, isEditing }) {
               clearErrors={clearErrors}
               isRequired={field.isRequired || false}
               isMulti={field.isMulti || false}
-              defaultValue={isEditing && client ? client[field.name] : null}
+              defaultValue={
+                isEditing && client
+                  ? client[section?.sectionName][field.name]
+                  : null
+              }
             />
           ))}
         </div>

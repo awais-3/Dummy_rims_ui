@@ -25,7 +25,6 @@ export default function GenericInput({
   isMulti,
   defaultValue,
 }) {
-  console.log(defaultValue);
   const handleCheckboxChange = (e) => {
     setValue(name, e.target.checked);
     clearErrors(name);

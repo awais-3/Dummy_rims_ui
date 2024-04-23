@@ -24,6 +24,7 @@ const ProductForm = ({ isEditing = false, product = {}, type }) => {
   };
 
   useEffect(() => {
+    console.log(product);
     if (isEditing && product) {
       let fieldsToSet = [];
       if (type === "Parent") {
@@ -36,11 +37,17 @@ const ProductForm = ({ isEditing = false, product = {}, type }) => {
         );
       }
 
-      fieldsToSet.forEach((fieldName) => {
-        if (product[fieldName] !== undefined) {
-          setValue(fieldName, product[fieldName]);
-        }
-      });
+      Object.entries(product).map(([sectionName, sectionData]) =>
+        Object.entries(sectionData).map(([fieldName, fieldValue]) => {
+          setValue(fieldName, fieldValue);
+        })
+      );
+
+      // fieldsToSet.forEach((fieldName) => {
+      //   if (product[fieldName] !== undefined) {
+      //     setValue(fieldName, product[fieldName]);
+      //   }
+      // });
     }
   }, [isEditing, product, type]);
 
@@ -69,7 +76,9 @@ const ProductForm = ({ isEditing = false, product = {}, type }) => {
                   isRequired={field.isRequired || false}
                   isMulti={field.isMulti || false}
                   defaultValue={
-                    isEditing && product ? product[field.name] : null
+                    isEditing && product
+                      ? product[section?.sectionName][field.name]
+                      : null
                   }
                 />
               ))}
@@ -97,7 +106,9 @@ const ProductForm = ({ isEditing = false, product = {}, type }) => {
                   isRequired={field.isRequired || false}
                   isMulti={field.isMulti || false}
                   defaultValue={
-                    isEditing && product ? product[field.name] : null
+                    isEditing && product
+                      ? product[section?.sectionName][field.name]
+                      : null
                   }
                 />
               ))}

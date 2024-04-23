@@ -8,7 +8,7 @@ export default function ClientRow({ client, index }) {
       <Box fontWeight="semibold">{index + 1}:</Box>
       <Box
         as={Link}
-        href={"/partners/1"}
+        href={"/contacts/1"}
         _hover={{ textDecoration: "underline", color: "blue.500" }}
       >
         {client?.name}

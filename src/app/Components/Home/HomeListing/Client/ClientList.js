@@ -36,7 +36,7 @@ export default function ClientList() {
         borderTopLeftRadius="md"
         borderTopRightRadius="md"
       >
-        Active Partners
+        Active Contacts
       </Box>
       <Box
         maxH="600px"

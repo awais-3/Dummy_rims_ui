@@ -25,28 +25,29 @@ function ProcedureForm({ type, isEditing = false, procedure = {} }) {
   };
 
   useEffect(() => {
-    if (isEditing && procedure) {
-      let fieldsToSet = [];
-      if (type === "Parent") {
-        fieldsToSet = parentProcedureFormFields.flatMap((section) =>
-          section.fields.map((field) => field.name)
-        );
-      } else if (type === "New") {
-        fieldsToSet = newProcedureFormFields.flatMap((section) =>
-          section.fields.map((field) => field.name)
-        );
-      } else if (type === "Renewal") {
-        fieldsToSet = renewalProcedureFormFields.flatMap((section) =>
-          section.fields.map((field) => field.name)
-        );
-      }
+    // console.log(procedure);
+    // if (isEditing && procedure) {
+    //   let fieldsToSet = [];
+    //   if (type === "Parent") {
+    //     fieldsToSet = parentProcedureFormFields.flatMap((section) =>
+    //       section.fields.map((field) => field.name)
+    //     );
+    //   } else if (type === "New") {
+    //     fieldsToSet = newProcedureFormFields.flatMap((section) =>
+    //       section.fields.map((field) => field.name)
+    //     );
+    //   } else if (type === "Renewal") {
+    //     fieldsToSet = renewalProcedureFormFields.flatMap((section) =>
+    //       section.fields.map((field) => field.name)
+    //     );
+    //   }
 
-      fieldsToSet.forEach((fieldName) => {
-        if (procedure[fieldName] !== undefined) {
-          setValue(fieldName, procedure[fieldName]);
-        }
-      });
-    }
+    //   fieldsToSet.forEach((fieldName) => {
+    //     if (procedure[fieldName] !== undefined) {
+    //       setValue(fieldName, procedure[fieldName]);
+    //     }
+    //   });
+    // }
 
     Object.entries(procedure).map(([sectionName, sectionData]) =>
       Object.entries(sectionData).map(([fieldName, fieldValue]) => {
