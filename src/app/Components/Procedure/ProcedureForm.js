@@ -1,15 +1,18 @@
 "use client";
 import { useForm } from "react-hook-form";
-import { Button, Box, Select, FormLabel } from "@chakra-ui/react";
+import { Button, Box, Select, FormLabel, Center } from "@chakra-ui/react";
 import GenericInput from "../Common/Inputs/Input";
 import {
   parentProcedureFormFields,
   newProcedureFormFields,
   renewalProcedureFormFields,
+  procedureMilestoneFields,
 } from "../../assets/Data";
 import FormSubHeder from "../Common/FormSubHeder";
 import React, { useEffect } from "react";
-function ProcedureForm({ type, isEditing = false, procedure = {} }) {
+import { useDispatch, useSelector } from "react-redux";
+import { addProcedure } from "../../../lib/redux/slice/procedureSlice";
+function ProcedureForm({ type, isEditing = false, procedure = {}, onClose }) {
   const {
     register,
     handleSubmit,
@@ -17,38 +20,34 @@ function ProcedureForm({ type, isEditing = false, procedure = {} }) {
     clearErrors,
     formState: { errors },
   } = useForm();
-
+  const templates = useSelector((state) => state.formBuilder.templates);
   const [selectedTemplate, setSelectedTemplate] = React.useState(null);
+  const [selectedMilestone, setSelectedMilestone] = React.useState(null);
+  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const dataWithId = {
+      ...data,
+      id: Math.random().toString(36).substr(2, 9),
+    };
+    dispatch(addProcedure(dataWithId));
+    onClose();
+  };
+  const milestoneChangeHandler = (milestone) => {
+    const milestoneFieldsToRender = [];
+
+    Object.keys(milestone).forEach((mileKey) => {
+      procedureMilestoneFields.forEach((proMil) => {
+        if (proMil.name === mileKey) {
+          milestoneFieldsToRender.push(proMil);
+        }
+      });
+    });
+
+    setSelectedMilestone(milestoneFieldsToRender);
   };
 
   useEffect(() => {
-    // console.log(procedure);
-    // if (isEditing && procedure) {
-    //   let fieldsToSet = [];
-    //   if (type === "Parent") {
-    //     fieldsToSet = parentProcedureFormFields.flatMap((section) =>
-    //       section.fields.map((field) => field.name)
-    //     );
-    //   } else if (type === "New") {
-    //     fieldsToSet = newProcedureFormFields.flatMap((section) =>
-    //       section.fields.map((field) => field.name)
-    //     );
-    //   } else if (type === "Renewal") {
-    //     fieldsToSet = renewalProcedureFormFields.flatMap((section) =>
-    //       section.fields.map((field) => field.name)
-    //     );
-    //   }
-
-    //   fieldsToSet.forEach((fieldName) => {
-    //     if (procedure[fieldName] !== undefined) {
-    //       setValue(fieldName, procedure[fieldName]);
-    //     }
-    //   });
-    // }
-
     Object.entries(procedure).map(([sectionName, sectionData]) =>
       Object.entries(sectionData).map(([fieldName, fieldValue]) => {
         setValue(fieldName, fieldValue);
@@ -96,41 +95,124 @@ function ProcedureForm({ type, isEditing = false, procedure = {} }) {
         <>
           {selectedTemplate ? (
             <>
-              {newProcedureFormFields.map((section, index) => (
-                <div key={index}>
-                  <FormSubHeder heading={section?.sectionName} />
-                  {section.fields.map((field) => (
-                    <GenericInput
-                      key={field.name}
-                      label={field.label}
-                      name={field.name}
-                      options={field.options || []}
-                      type={field.type}
-                      errors={errors}
-                      setValue={setValue}
-                      register={register}
-                      clearErrors={clearErrors}
-                      isRequired={field.isRequired || false}
-                      isMulti={field.isMulti || false}
-                      defaultValue={
-                        isEditing && procedure
-                          ? procedure[section?.sectionName][field.name]
-                          : null
-                      }
-                    />
-                  ))}
-                </div>
-              ))}
+              {newProcedureFormFields.every((section) => {
+                const selectedFields =
+                  selectedTemplate?.[section.sectionName]?.fields || [];
+                return (
+                  section.fields.filter((field) =>
+                    selectedFields.includes(field.name)
+                  ).length === 0
+                );
+              }) ? (
+                <Center>Not any field</Center>
+              ) : (
+                newProcedureFormFields.map((section, index) => {
+                  const selectedFields =
+                    selectedTemplate?.[section.sectionName]?.fields || [];
+                  const fieldsToRender = section.fields.filter((field) =>
+                    selectedFields.includes(field.name)
+                  );
+
+                  return fieldsToRender.length > 0 ? (
+                    <div key={index}>
+                      <FormSubHeder heading={section?.sectionName} />
+                      {fieldsToRender.map((field) => {
+                        if (field?.name === "milestonesOverview") {
+                          return (
+                            <div key={field.name}>
+                              <GenericInput
+                                label={field.label}
+                                name={field.name}
+                                options={field.options || []}
+                                type={field.type}
+                                errors={errors}
+                                setValue={setValue}
+                                register={register}
+                                clearErrors={clearErrors}
+                                isRequired={field.isRequired || false}
+                                isMulti={field.isMulti || false}
+                                milestoneChangeHandler={milestoneChangeHandler}
+                                defaultValue={
+                                  isEditing && procedure
+                                    ? procedure[section?.sectionName][
+                                        field.name
+                                      ]
+                                    : null
+                                }
+                              />
+                              {selectedMilestone?.length > 0 &&
+                                selectedMilestone?.map((field) => (
+                                  <GenericInput
+                                    key={field.name}
+                                    label={field.label}
+                                    name={field.name}
+                                    options={field.options || []}
+                                    type={field.type}
+                                    errors={errors}
+                                    setValue={setValue}
+                                    register={register}
+                                    clearErrors={clearErrors}
+                                    isRequired={field.isRequired || false}
+                                    isMulti={field.isMulti || false}
+                                    defaultValue={
+                                      isEditing && procedure
+                                        ? procedure[section?.sectionName][
+                                            field.name
+                                          ]
+                                        : null
+                                    }
+                                  />
+                                ))}
+                            </div>
+                          );
+                        } else {
+                          return (
+                            <GenericInput
+                              key={field.name}
+                              label={field.label}
+                              name={field.name}
+                              options={field.options || []}
+                              type={field.type}
+                              errors={errors}
+                              setValue={setValue}
+                              register={register}
+                              clearErrors={clearErrors}
+                              isRequired={field.isRequired || false}
+                              isMulti={field.isMulti || false}
+                              defaultValue={
+                                isEditing && procedure
+                                  ? procedure[section?.sectionName][field.name]
+                                  : null
+                              }
+                            />
+                          );
+                        }
+                      })}
+                    </div>
+                  ) : null;
+                })
+              )}
             </>
           ) : (
             <Box mt={4}>
               <FormLabel>Select Template</FormLabel>
               <Select
                 placeholder="Select Template"
-                onChange={(e) => setSelectedTemplate(e.target.value)}
+                onChange={(e) => {
+                  const selected = templates.find(
+                    (template) => template.templateName === e.target.value
+                  );
+                  setSelectedTemplate(selected);
+                }}
               >
-                <option value="template1">Template 1</option>
-                <option value="template2">Template 2</option>
+                {templates.map((template) => (
+                  <option
+                    key={template.templateName}
+                    value={template.templateName}
+                  >
+                    {template.templateName}
+                  </option>
+                ))}
               </Select>
             </Box>
           )}

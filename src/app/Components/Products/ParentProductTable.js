@@ -1,224 +1,104 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
-  Checkbox,
-  Box,
-  IconButton,
-  Skeleton,
-  Input,
-  Button,
-  Flex,
-  Select,
-  Text,
-} from "@chakra-ui/react";
-import { MdDeleteOutline } from "react-icons/md";
-import TablePagination from "../Common/TablePagination";
-import { parentProductData } from "../../assets/Data";
+import React, { useState } from "react";
+import { Box } from "@chakra-ui/react";
+import CustomDataGrid from "../Common/CustomDataGrid";
 import Link from "next/link";
+import { IconButton } from "@mui/material";
+import { MdDeleteOutline, MdEdit } from "react-icons/md";
+import { useSelector, useDispatch } from "react-redux";
+import { removeParentProduct } from "../../../lib/redux/slice/parentProductSlice";
 
 export default function ParentProductTable() {
-  const [pageSize, setPageSize] = useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalProcedure, setTotalProcedure] = useState(
-    parentProductData?.length
-  );
-  const [Products, setProducts] = useState();
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.parentProduct.products);
   const [selectedRows, setSelectedRows] = useState([]);
-  const [selectAll, setSelectAll] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const getPageData = () => {
-    const startIndex = (currentPage - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    return Products?.slice(startIndex, endIndex);
-  };
 
-  useEffect(() => {
-    setTimeout(() => {
-      setProducts(parentProductData);
-      setIsLoading(false);
-    }, 1000);
-  }, []);
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  const handleDelete = () => {
+    selectedRows.forEach((parentProductCode) => {
+      dispatch(removeParentProduct(parentProductCode));
+    });
     setSelectedRows([]);
-    setSelectAll(false);
   };
 
-  const handlePageSizeChange = (size) => {
-    setPageSize(size);
+  const handleEdit = (parentProductCode) => {
+    console.log("Edit product with code:", parentProductCode);
   };
 
-  const handleCheckboxChange = (e, item) => {
-    const { checked } = e.target;
-    if (checked) {
-      setSelectedRows([...selectedRows, item]);
-    } else {
-      setSelectedRows(
-        selectedRows.filter(
-          (row) => row.parentProductCode !== item.parentProductCode
-        )
-      );
-    }
+  const handleDeleteSingle = (parentProductCode) => {
+    dispatch(removeParentProduct(parentProductCode));
   };
 
-  const handleSelectAll = (e) => {
-    const { checked } = e.target;
-    setSelectAll(checked);
-    if (checked) {
-      setSelectedRows([...parentProductData]);
-    } else {
-      setSelectedRows([]);
-    }
-  };
-
-  const handleDeleteSelectedRows = () => {
-    const updatedData = parentProductData.filter(
-      (row) =>
-        !selectedRows.some(
-          (selectedRow) =>
-            selectedRow.parentProductCode === row.parentProductCode
-        )
-    );
-    console.log("Updated Data after deletion:", updatedData);
-  };
+  const columns = [
+    {
+      field: "productCode",
+      headerName: "Parent Product Code",
+      renderCell: (params) => (
+        <Link href={`/products/${params.row.productCode}`}>
+          <Box
+            as="span"
+            _hover={{
+              textDecoration: "underline",
+              color: "blue.500",
+            }}
+          >
+            {params.value}
+          </Box>
+        </Link>
+      ),
+    },
+    { field: "productName", headerName: "Product Name", width: 200 },
+    {
+      field: "activeSubstanceEN",
+      headerName: "Active Substance EN",
+      width: 200,
+    },
+    {
+      field: "activeSubstanceFR",
+      headerName: "Active Substance FR",
+      width: 200,
+    },
+    { field: "ATCCode", headerName: "ATC Code", width: 200 },
+    { field: "productType", headerName: "Product Type", width: 200 },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 150,
+      renderCell: (params) => (
+        <Box display="flex" gap="2">
+          <IconButton
+            aria-label="edit"
+            color="primary"
+            onClick={() => handleEdit(params.row.productCode)}
+          >
+            <MdEdit />
+          </IconButton>
+          <IconButton
+            aria-label="delete"
+            color="error"
+            onClick={() => handleDeleteSingle(params.row.productCode)}
+          >
+            <MdDeleteOutline />
+          </IconButton>
+        </Box>
+      ),
+    },
+  ];
 
   return (
-    <>
-      <Flex py="4" flexDir={"column"} gap="4">
-        <Flex gap="4">
-          <Input placeholder="Search by name" />
-          <Button colorScheme="blue" variant={"outline"}>
-            Search
-          </Button>
-        </Flex>
-
-        <Flex justify={"space-between"}>
-          <Box></Box>
-          <Box as="form" display="flex" gap="2" alignItems={"center"}>
-            <Text whiteSpace={"nowrap"}>Action</Text>
-            <Select isDisabled={selectedRows.length === 0}>
-              <option>Delete</option>
-            </Select>
-          </Box>
-        </Flex>
-      </Flex>
-      <TableContainer flex="1" display="flex" flexDirection={"column"}>
-        <Table variant="striped">
-          <Thead bg="blue.600" zIndex="10">
-            <Tr>
-              <Th color="white">
-                <Checkbox
-                  isChecked={selectAll}
-                  onChange={handleSelectAll}
-                  mr="3"
-                />
-                <span>Parent ProductCode</span>
-              </Th>
-              <Th color="white">Product Name</Th>
-              <Th color="white">ActiveSubstance EN</Th>
-              <Th color="white">ActiveSubstance FR</Th>
-              <Th color="white">ATC Code</Th>
-              <Th color="white">Product Type</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {isLoading ? (
-              // Skeleton when loading (unchanged)
-              Array.from({ length: pageSize }).map((_, index) => (
-                <Tr key={index} w="full">
-                  <Td>
-                    <Box display="flex" gap="15px">
-                      <Skeleton height="15px" width="15px" />
-                      <Skeleton height="15px" width="full" />
-                    </Box>
-                  </Td>
-                  <Td>
-                    <Skeleton height="15px" width="full" />
-                  </Td>
-                  <Td>
-                    <Skeleton height="15px" width="full" />
-                  </Td>
-                  <Td>
-                    <Skeleton height="15px" width="full" />
-                  </Td>
-                  <Td>
-                    <Skeleton height="15px" width="full" />
-                  </Td>
-                  <Td>
-                    <Skeleton height="15px" width="full" />
-                  </Td>
-                </Tr>
-              ))
-            ) : Products?.length === 0 ? (
-              // Show message if Products is empty
-              <Tr>
-                <Td colSpan={3} textAlign="center">
-                  No records found.
-                </Td>
-              </Tr>
-            ) : (
-              // Actual table data (unchanged)
-              getPageData()?.map((item, index) => (
-                <Tr key={index}>
-                  <Td>
-                    <Checkbox
-                      isChecked={selectedRows.some(
-                        (row) =>
-                          row.parentProductCode === item.parentProductCode
-                      )}
-                      onChange={(e) => handleCheckboxChange(e, item)}
-                      mt="1"
-                      mr="3"
-                    />
-                    <Link href={`/products/${1}`}>
-                      <Box
-                        as="spam"
-                        _hover={{
-                          textDecoration: "underline",
-                          color: "blue.500",
-                        }}
-                      >
-                        {item.parentProductCode}
-                      </Box>
-                    </Link>
-                  </Td>
-                  <Td>{item.productName}</Td>
-                  <Td>{item.activeSubstanceEN}</Td>
-                  <Td>{item.activeSubstanceFR}</Td>
-                  <Td>{item.ATCCode}</Td>
-                  <Td>{item.productType}</Td>
-                </Tr>
-              ))
-            )}
-          </Tbody>
-        </Table>
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            zIndex: 1,
-          }}
-          bg="blue.600"
-          color={"white"}
-          p="2"
-        >
-          <div></div>
-          <TablePagination
-            totalCount={totalProcedure}
-            pageSize={pageSize}
-            onPageChange={handlePageChange}
-            handlePageSizeChange={handlePageSizeChange}
-          />
-        </Box>
-      </TableContainer>
-    </>
+    <CustomDataGrid
+      rows={products}
+      columns={columns}
+      pageSizeOptions={[5, 10]}
+      checkboxSelection
+      loading={false}
+      handleDelete={handleDelete}
+      customClasses="w-full h-[500px]"
+      onRowSelectionModelChange={(newRowSelectionModel) => {
+        console.log(newRowSelectionModel);
+        setSelectedRows(newRowSelectionModel);
+      }}
+      rowSelectionModel={selectedRows}
+      getRowId={(row) => row.productCode}
+    />
   );
 }

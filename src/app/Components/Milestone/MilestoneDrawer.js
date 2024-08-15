@@ -41,7 +41,7 @@ export default function MilestoneDrawer({ isOpen, onClose, type, isEditing }) {
           <Divider borderColor="blue.500" borderWidth={1} bg="blue" />
 
           <DrawerBody>
-            <MilestoneForm type={type} />
+            <MilestoneForm type={type} onClose={onClose} />
           </DrawerBody>
 
           <DrawerFooter

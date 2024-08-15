@@ -9,15 +9,16 @@ import {
 } from "@chakra-ui/react";
 
 import FormSubHeder from "../Common/FormSubHeder";
-import { useEffect } from "react";
 
 import {
   milestoneFormFields,
   milestoneTemplateFormFields,
 } from "../../assets/Data/index";
 import GenericInput from "../Common/Inputs/Input";
+import { useDispatch } from "react-redux";
+import { addMilestone } from "../../../lib/redux/slice/milestoneSlice";
 
-function MilestoneForm({ type }) {
+function MilestoneForm({ type, onClose }) {
   const {
     register,
     handleSubmit,
@@ -26,8 +27,19 @@ function MilestoneForm({ type }) {
     formState: { errors },
   } = useForm();
 
+  const dispatch = useDispatch();
+
   const onSubmit = (data) => {
-    console.log(data);
+    const newMilestone = {
+      id: Math.floor(Math.random() * 1000000),
+      usedInCount: 0,
+      createdBy: "User",
+      milestoneCount: 0,
+      ...data,
+    };
+    dispatch(addMilestone(newMilestone));
+    console.log(newMilestone);
+    if (onClose) onClose();
   };
 
   return (
@@ -36,45 +48,45 @@ function MilestoneForm({ type }) {
       onSubmit={handleSubmit(onSubmit)}
       px={{ base: 2, md: 6, lg: 12 }}
     >
-      {type === "Milestone Template" && (
-        <>
-          <FormControl isInvalid={errors["milstoneName"]} my="4">
-            <FormLabel htmlFor="milstoneName">Milstone Name</FormLabel>
-            <Input
-              id={`milstoneName`}
-              type="text"
-              placeholder="Milestone name"
-              {...register(`milstoneName`, { required: true })}
-            />
-            <FormErrorMessage>
-              {errors["milstoneName"]?.message || "This field is required"}
-            </FormErrorMessage>
-          </FormControl>
-          {milestoneFormFields.map((section, index) => (
-            <div key={index}>
-              <FormSubHeder heading={section?.sectionName} />
-              {section.fields.map((field) => (
-                <GenericInput
-                  key={field.name}
-                  label={field.label}
-                  name={field.name}
-                  options={field.options || []}
-                  type={field.type}
-                  errors={errors}
-                  setValue={setValue}
-                  register={register}
-                  clearErrors={clearErrors}
-                  isRequired={field.isRequired || false}
-                  isMulti={field.isMulti || false}
-                  defaultValue={null}
-                />
-              ))}
-            </div>
-          ))}
-        </>
-      )}
+      {/* {type === "Milestone Template" && ( */}
+      <>
+        <FormControl isInvalid={errors["milestoneName"]} my="4">
+          <FormLabel htmlFor="milestoneName">Milstone Name</FormLabel>
+          <Input
+            id={`milestoneName`}
+            type="text"
+            placeholder="Milestone name"
+            {...register(`milestoneName`, { required: true })}
+          />
+          <FormErrorMessage>
+            {errors["milestoneName"]?.message || "This field is required"}
+          </FormErrorMessage>
+        </FormControl>
+        {milestoneFormFields.map((section, index) => (
+          <div key={index}>
+            <FormSubHeder heading={section?.sectionName} />
+            {section.fields.map((field) => (
+              <GenericInput
+                key={field.name}
+                label={field.label}
+                name={field.name}
+                options={field.options || []}
+                type={field.type}
+                errors={errors}
+                setValue={setValue}
+                register={register}
+                clearErrors={clearErrors}
+                isRequired={field.isRequired || false}
+                isMulti={field.isMulti || false}
+                defaultValue={null}
+              />
+            ))}
+          </div>
+        ))}
+      </>
+      {/* )} */}
 
-      {type === "Milestone" && (
+      {/* {type === "Milestone" && (
         <>
           {milestoneTemplateFormFields.map((section, index) => (
             <div key={index}>
@@ -98,7 +110,7 @@ function MilestoneForm({ type }) {
             </div>
           ))}
         </>
-      )}
+      )} */}
 
       <Button
         colorScheme={"blue"}

@@ -43,7 +43,8 @@ export default function Page() {
       <Navbar />
       <Box p="2">
         <MilestoneCreate />
-        <Tabs
+        <MilestoneTable />
+        {/* <Tabs
           isFitted
           mt="4"
           index={tabIndexes[currentFilter]}
@@ -69,7 +70,7 @@ export default function Page() {
               {currentFilter === "Milestone Templates" && <MilestoneTable />}
             </TabPanel>
           </TabPanels>
-        </Tabs>
+        </Tabs> */}
       </Box>
     </div>
   );

@@ -14,7 +14,7 @@ import {
   Divider,
   Box,
 } from "@chakra-ui/react";
-import MilestoneForm from "./FormBuilderForm";
+import FormBuilderForm from "./FormBuilderForm";
 
 export default function FormBuilderDrawer({ isOpen, onClose }) {
   return (
@@ -41,7 +41,7 @@ export default function FormBuilderDrawer({ isOpen, onClose }) {
           <Divider borderColor="blue.500" borderWidth={1} bg="blue" />
 
           <DrawerBody>
-            <MilestoneForm />
+            <FormBuilderForm onClose={onClose} />
           </DrawerBody>
 
           <DrawerFooter

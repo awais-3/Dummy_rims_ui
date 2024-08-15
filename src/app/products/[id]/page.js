@@ -23,13 +23,13 @@ export default function Page() {
     router.push(`/products/1/?${newSearchParams.toString()}`);
   };
 
-  //   useEffect(() => {
-  //     if (!searchParams.get("current_filter")) {
-  //       const newSearchParams = new URLSearchParams(searchParams);
-  //       newSearchParams.set("current_filter", "Project Details");
-  //       router.push(`/products/1/?${newSearchParams.toString()}`);
-  //     }
-  //   }, []);
+  // useEffect(() => {
+  //   if (!searchParams.get("current_filter")) {
+  //     const newSearchParams = new URLSearchParams(searchParams);
+  //     newSearchParams.set("current_filter", "Project Details");
+  //     router.push(`/products/1/?${newSearchParams.toString()}`);
+  //   }
+  // }, []);
 
   return (
     <Box h="100vh">

@@ -41,9 +41,9 @@ export default function MilestoneCreate() {
             <MenuItem onClick={() => handleMenuItemClick("Milestone Template")}>
               Milestone Template
             </MenuItem>
-            <MenuItem onClick={() => handleMenuItemClick("Milestone")}>
+            {/* <MenuItem onClick={() => handleMenuItemClick("Milestone")}>
               Milestone
-            </MenuItem>
+            </MenuItem> */}
           </MenuList>
         </Menu>
 

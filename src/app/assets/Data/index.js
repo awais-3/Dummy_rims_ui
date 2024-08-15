@@ -4,6 +4,37 @@ const manufacturerOptions = [
   // Add more options as needed
 ];
 
+const procedureTypeOptions = [
+  { value: "new", label: "New" },
+  { value: "variation", label: "Variation" },
+  { value: "renewal", label: "Renewal" },
+  { value: "re-registration", label: "Re-registration" },
+  // Add more options as needed
+];
+
+const AuthorisationStatusOptions = [
+  { value: "planned", label: "Planned" },
+  { value: "pending", label: "Pending" },
+  { value: "queries", label: "Queries" },
+  { value: "valid", label: "Valid" },
+  { value: "rejected", label: "Rejected" },
+  { value: "withdrawn", label: "Withdrawn" },
+  { value: "not_renewed", label: "Not renewed" },
+];
+
+const teamMembersOptions = [
+  { value: "1", label: "John Doe" },
+  { value: "2", label: "Jane Smith" },
+  { value: "3", label: "Michael Johnson" },
+  { value: "4", label: "Emily Davis" },
+  { value: "5", label: "William Brown" },
+  { value: "6", label: "Olivia Wilson" },
+  { value: "7", label: "James Anderson" },
+  { value: "8", label: "Sophia Martinez" },
+  { value: "9", label: "Benjamin Taylor" },
+  { value: "10", label: "Emma Moore" },
+];
+
 const activeSubstanceManufacturerOptions = [
   {
     value: "activeSubstanceManufacturer1",
@@ -34,7 +65,7 @@ const parentProductOptions = [
 
 export const parentProductData = [
   {
-    parentProductCode: "ABC123",
+    productCode: "ABC123",
     productName: "Product A",
     activeSubstanceEN: "Substance A",
     activeSubstanceFR: "Substance A (FR)",
@@ -42,7 +73,7 @@ export const parentProductData = [
     productType: "Type 1",
   },
   {
-    parentProductCode: "DEF456",
+    productCode: "DEF456",
     productName: "Product B",
     activeSubstanceEN: "Substance B",
     activeSubstanceFR: "Substance B (FR)",
@@ -50,7 +81,7 @@ export const parentProductData = [
     productType: "Type 2",
   },
   {
-    parentProductCode: "GHI789",
+    productCode: "GHI789",
     productName: "Product C",
     activeSubstanceEN: "Substance C",
     activeSubstanceFR: "Substance C (FR)",
@@ -59,7 +90,7 @@ export const parentProductData = [
   },
   // Additional entries...
   {
-    parentProductCode: "JKL101",
+    productCode: "JKL101",
     productName: "Product D",
     activeSubstanceEN: "Substance D",
     activeSubstanceFR: "Substance D (FR)",
@@ -67,7 +98,7 @@ export const parentProductData = [
     productType: "Type 4",
   },
   {
-    parentProductCode: "MNO112",
+    productCode: "MNO112",
     productName: "Product E",
     activeSubstanceEN: "Substance E",
     activeSubstanceFR: "Substance E (FR)",
@@ -75,39 +106,7 @@ export const parentProductData = [
     productType: "Type 5",
   },
   {
-    parentProductCode: "PQR113",
-    productName: "Product F",
-    activeSubstanceEN: "Substance F",
-    activeSubstanceFR: "Substance F (FR)",
-    ATCCode: "KL06",
-    productType: "Type 6",
-  },
-  {
-    parentProductCode: "PQR113",
-    productName: "Product F",
-    activeSubstanceEN: "Substance F",
-    activeSubstanceFR: "Substance F (FR)",
-    ATCCode: "KL06",
-    productType: "Type 6",
-  },
-  {
-    parentProductCode: "PQR113",
-    productName: "Product F",
-    activeSubstanceEN: "Substance F",
-    activeSubstanceFR: "Substance F (FR)",
-    ATCCode: "KL06",
-    productType: "Type 6",
-  },
-  {
-    parentProductCode: "PQR113",
-    productName: "Product F",
-    activeSubstanceEN: "Substance F",
-    activeSubstanceFR: "Substance F (FR)",
-    ATCCode: "KL06",
-    productType: "Type 6",
-  },
-  {
-    parentProductCode: "PQR113",
+    productCode: "PQR113",
     productName: "Product F",
     activeSubstanceEN: "Substance F",
     activeSubstanceFR: "Substance F (FR)",
@@ -124,6 +123,7 @@ export const productData = [
     manufacturer: "Manufacturer A",
     strength: "Strength A",
     countryOfOrigin: "Country A",
+    productType: "Type 11",
   },
   {
     productCode: "DEF002",
@@ -132,6 +132,7 @@ export const productData = [
     manufacturer: "Manufacturer B",
     strength: "Strength B",
     countryOfOrigin: "Country B",
+    productType: "Type 12",
   },
   {
     productCode: "GHI003",
@@ -140,6 +141,7 @@ export const productData = [
     manufacturer: "Manufacturer C",
     strength: "Strength C",
     countryOfOrigin: "Country C",
+    productType: "Type 13",
   },
   {
     productCode: "JKL004",
@@ -148,6 +150,7 @@ export const productData = [
     manufacturer: "Manufacturer D",
     strength: "Strength D",
     countryOfOrigin: "Country D",
+    productType: "Type 14",
   },
   {
     productCode: "MNO005",
@@ -156,6 +159,7 @@ export const productData = [
     manufacturer: "Manufacturer E",
     strength: "Strength E",
     countryOfOrigin: "Country E",
+    productType: "Type 15",
   },
   {
     productCode: "PQR006",
@@ -164,6 +168,7 @@ export const productData = [
     manufacturer: "Manufacturer F",
     strength: "Strength F",
     countryOfOrigin: "Country F",
+    productType: "Type 16",
   },
   {
     productCode: "STU007",
@@ -172,6 +177,7 @@ export const productData = [
     manufacturer: "Manufacturer G",
     strength: "Strength G",
     countryOfOrigin: "Country G",
+    productType: "Type 17",
   },
   {
     productCode: "VWX008",
@@ -180,6 +186,7 @@ export const productData = [
     manufacturer: "Manufacturer H",
     strength: "Strength H",
     countryOfOrigin: "Country H",
+    productType: "Type 18",
   },
   {
     productCode: "YZA009",
@@ -188,6 +195,7 @@ export const productData = [
     manufacturer: "Manufacturer I",
     strength: "Strength I",
     countryOfOrigin: "Country I",
+    productType: "Type 19",
   },
   {
     productCode: "BCD010",
@@ -196,71 +204,76 @@ export const productData = [
     manufacturer: "Manufacturer J",
     strength: "Strength J",
     countryOfOrigin: "Country J",
+    productType: "Type 20",
   },
 ];
 
 export const MilestoneListData = [
   {
+    id: 1,
     templateName: "Template 1",
     milestoneCount: 5,
     createdBy: "User 1",
     usedInCount: 3,
   },
   {
+    id: 2,
     templateName: "Template 2",
     milestoneCount: 8,
     createdBy: "User 2",
     usedInCount: 2,
   },
   {
+    id: 3,
     templateName: "Template 3",
     milestoneCount: 3,
     createdBy: "User 3",
     usedInCount: 7,
   },
   {
+    id: 4,
     templateName: "Template 4",
     milestoneCount: 6,
     createdBy: "User 4",
     usedInCount: 5,
   },
   {
+    id: 5,
     templateName: "Template 5",
     milestoneCount: 4,
     createdBy: "User 5",
     usedInCount: 1,
   },
   {
+    id: 6,
     templateName: "Template 6",
     milestoneCount: 7,
     createdBy: "User 6",
     usedInCount: 4,
   },
   {
+    id: 7,
     templateName: "Template 7",
     milestoneCount: 2,
     createdBy: "User 7",
     usedInCount: 6,
   },
   {
+    id: 8,
     templateName: "Template 8",
     milestoneCount: 9,
     createdBy: "User 8",
     usedInCount: 2,
   },
   {
+    id: 9,
     templateName: "Template 9",
     milestoneCount: 3,
     createdBy: "User 9",
     usedInCount: 8,
   },
   {
-    templateName: "Template 10",
-    milestoneCount: 6,
-    createdBy: "User 10",
-    usedInCount: 5,
-  },
-  {
+    id: 10,
     templateName: "Template 10",
     milestoneCount: 6,
     createdBy: "User 10",
@@ -329,7 +342,7 @@ export const parentProcedureFormFields = [
         label: "Procedure Type",
         name: "procedureType",
         type: "select",
-        options: [], // Add options here
+        options: procedureTypeOptions || [],
         isRequired: true,
       },
       {
@@ -379,8 +392,8 @@ export const parentProcedureFormFields = [
         label: "Country",
         name: "country",
         type: "select",
-        options: [], // Add options here
-        isRequired: true,
+        options: countryOptions || [],
+
         isMulti: true, // For multi-select
       },
     ],
@@ -395,21 +408,21 @@ export const newProcedureFormFields = [
         label: "Procedure Type",
         name: "procedureType",
         type: "select",
-        options: [],
+        options: procedureTypeOptions || [],
         isRequired: true,
       },
       {
         label: "Country",
         name: "country",
         type: "select",
-        options: [],
+        options: countryOptions || [],
         isRequired: true,
       },
       {
         label: "Authorisation status",
         name: "authorisationStatus",
         type: "select",
-        options: [],
+        options: AuthorisationStatusOptions || [],
         isRequired: true,
       },
       { label: "MA Number", name: "maNumber", type: "text", isRequired: true },
@@ -421,9 +434,9 @@ export const newProcedureFormFields = [
         label: "Team Member(s)",
         name: "teamMembers",
         type: "select",
-        options: [],
+        options: teamMembersOptions || [],
         isMulti: true,
-        isRequired: true,
+        // isRequired: true,
       },
     ],
   },
@@ -440,8 +453,7 @@ export const newProcedureFormFields = [
       {
         label: "Product Type",
         name: "productType",
-        type: "text",
-        isRequired: true,
+        type: "uneditable",
       },
       { label: "Product Name", name: "productName", type: "uneditable" },
       { label: "Generic Name", name: "genericName", type: "uneditable" },
@@ -574,21 +586,21 @@ export const renewalProcedureFormFields = [
         label: "Procedure Type",
         name: "procedureType",
         type: "select",
-        options: [],
+        options: procedureTypeOptions || [],
         isRequired: true,
       },
       {
         label: "Country",
         name: "country",
         type: "select",
-        options: [],
+        options: countryOptions || [],
         isRequired: true,
       },
       {
         label: "Authorisation status",
         name: "authorisationStatus",
         type: "select",
-        options: [],
+        options: AuthorisationStatusOptions || [],
         isRequired: true,
       },
       { label: "MA Number", name: "maNumber", type: "text", isRequired: true },
@@ -604,9 +616,8 @@ export const renewalProcedureFormFields = [
         label: "Team Member(s)",
         name: "teamMembers",
         type: "select",
-        options: [],
+        options: teamMembersOptions || [],
         isMulti: true,
-        isRequired: true,
       },
     ],
   },
@@ -624,7 +635,6 @@ export const renewalProcedureFormFields = [
         label: "Product Type",
         name: "productType",
         type: "text",
-        isRequired: true,
       },
       { label: "Product Name", name: "productName", type: "uneditable" },
       { label: "Generic Name", name: "genericName", type: "uneditable" },
@@ -782,13 +792,13 @@ export const parentProductFormFields = [
         type: "text",
         isRequired: true,
       },
-      { label: "ATC Code", name: "atcCode", type: "text", isRequired: true },
+      { label: "ATC Code", name: "ATCCode", type: "text", isRequired: true },
       {
         label: "Product Type",
         name: "productType",
         type: "select",
-        options: [],
-        isRequired: true,
+        options: parentProductOptions || [],
+        isRequired: false,
       },
     ],
   },
@@ -813,13 +823,13 @@ export const newProductFormFields = [
       },
       { label: "Product name", name: "productName", type: "uneditable" },
       { label: "Product type", name: "productType", type: "uneditable" },
-      { label: "ATC code", name: "atcCode", type: "uneditable" },
+      { label: "ATC code", name: "ATCCode", type: "uneditable" },
       {
         label: "Manufacturer",
         name: "manufacturer",
         type: "select",
         options: [],
-        isRequired: true,
+        isRequired: false,
       },
       {
         label: "Active substance (EN)",
@@ -836,7 +846,7 @@ export const newProductFormFields = [
         name: "activeSubstanceManufacturer",
         type: "select",
         options: [],
-        isRequired: true,
+        isRequired: false,
       },
       { label: "Strength", name: "strength", type: "text" },
       {
@@ -852,7 +862,7 @@ export const newProductFormFields = [
         type: "select",
         options: [],
         isMulti: true,
-        isRequired: true,
+        isRequired: false,
       },
       { label: "PGHT", name: "pght", type: "autofilled" },
       {
@@ -885,6 +895,177 @@ export const newProductFormFields = [
         type: "text",
       },
     ],
+  },
+];
+
+export const procedureMilestoneFields = [
+  {
+    label: "CPP Requested",
+    name: "cppRequested",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "CPP Received",
+    name: "cppReceived",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "FSC Requested",
+    name: "fscRequested",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "FSC Received",
+    name: "fscReceived",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "Registration samples requested",
+    name: "registrationSamplesRequested",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "SO n° received",
+    name: "soNumberReceived",
+    type: "date",
+    defaultValue: false,
+  },
+  {
+    label: "Dossier sent",
+    name: "dossierSent",
+    type: "date",
+    defaultValue: false,
+  },
+  {
+    label: "Samples sent",
+    name: "samplesSent",
+    type: "date",
+    defaultValue: false,
+  },
+  {
+    label: "Inform local partners of shipment",
+    name: "informLocalPartners",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "Product added in monthly report",
+    name: "productAddedInMonthlyReport",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "Dossier shipment follow up",
+    name: "dossierShipmentFollowUp",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "Finished dossier from WiP to Submitted",
+    name: "finishedDossierSubmitted",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "Application letter",
+    name: "applicationLetter",
+    type: "document",
+    defaultValue: false,
+  },
+  {
+    label: "Payment request (incl number generation)",
+    name: "paymentRequest",
+    type: "date",
+    defaultValue: false,
+  },
+  {
+    label: "Follow-up of payment and receipt of POP",
+    name: "paymentFollowUp",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "POP sent to local partner",
+    name: "popSentToLocalPartner",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "Dossier received",
+    name: "dossierReceived",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "Samples received",
+    name: "samplesReceived",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "Dossier submitted",
+    name: "dossierSubmitted",
+    type: "date",
+    defaultValue: false,
+  },
+  {
+    label: "Proof of submission received",
+    name: "proofOfSubmissionReceived",
+    type: "document",
+    defaultValue: false,
+  },
+  {
+    label: "Proof of payment of registration fee received",
+    name: "proofOfPaymentReceived",
+    type: "document",
+    defaultValue: false,
+  },
+  {
+    label: "Queries received",
+    name: "queriesReceived",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "Queries to be submitted by",
+    name: "queriesToBeSubmittedBy",
+    type: "date",
+    defaultValue: false,
+  },
+  {
+    label: "Q&A folder created",
+    name: "qaFolderCreated",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "Queries submitted",
+    name: "queriesSubmitted",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "MA received",
+    name: "maReceived",
+    type: "document",
+    defaultValue: false,
+  },
+  {
+    label: "Inform EPS",
+    name: "informEPS",
+    type: "checkbox",
+    defaultValue: false,
+  },
+  {
+    label: "Inform Partner",
+    name: "informPartner",
+    type: "checkbox",
+    defaultValue: false,
   },
 ];
 
@@ -926,6 +1107,7 @@ export const milestoneFormFields = [
         label: "SO n° received",
         name: "soNumberReceived",
         type: "checkbox",
+
         defaultValue: false,
       },
       {

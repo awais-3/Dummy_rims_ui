@@ -8,7 +8,7 @@ export default function FormBuilderCreate() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box>
+    <Box mb={4}>
       <Box display="flex" justifyContent="end">
         <Button
           as={Button}

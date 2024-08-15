@@ -4,6 +4,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { Chakratheme } from "./chakraTheme";
 
-export function Providers({ children }) {
+export function ChakraProviders({ children }) {
   return <ChakraProvider theme={Chakratheme}>{children}</ChakraProvider>;
 }

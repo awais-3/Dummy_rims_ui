@@ -49,6 +49,7 @@ export default function ProcedureDrawer({
               type={type}
               procedure={procedure}
               isEditing={isEditing}
+              onClose={onClose}
             />
           </DrawerBody>
 

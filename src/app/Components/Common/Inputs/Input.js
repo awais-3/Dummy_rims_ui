@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   FormControl,
@@ -11,6 +12,7 @@ import {
   EditableInput,
 } from "@chakra-ui/react";
 import Select from "react-select";
+import { useSelector } from "react-redux";
 
 export default function GenericInput({
   label,
@@ -24,9 +26,66 @@ export default function GenericInput({
   isRequired,
   isMulti,
   defaultValue,
+  milestoneChangeHandler,
 }) {
   const handleCheckboxChange = (e) => {
     setValue(name, e.target.checked);
+    clearErrors(name);
+  };
+
+  const parentProducts = useSelector((state) => state.parentProduct.products);
+  const products = useSelector((state) => state.product.products);
+  const milestones = useSelector((state) => state.milestone.milestones);
+
+  if (name === "parentProduct" && type === "select") {
+    options =
+      parentProducts?.length > 0 &&
+      parentProducts.map((product) => {
+        return { label: product?.productCode, value: product };
+      });
+  }
+
+  if (name === "productCode" && type === "select") {
+    const allProducts = [...products, ...parentProducts];
+    options =
+      allProducts?.length > 0 &&
+      allProducts.map((product) => {
+        return { label: product?.productCode, value: product };
+      });
+  }
+
+  if (name === "milestonesOverview" && type === "select") {
+    options =
+      milestones?.length > 0 &&
+      milestones.map((milestone) => {
+        return {
+          label: milestone?.milestoneName,
+          value: milestone,
+        };
+      });
+  }
+
+  const selectChangeHandler = (selectedOption) => {
+    if (name === "parentProduct") {
+      setValue("productName", selectedOption?.value?.productName);
+      setValue("productType", selectedOption?.value?.productType);
+      setValue("Generic Name", selectedOption?.value?.activeSubstanceEN);
+      setValue("activeSubstanceFR", selectedOption?.value?.activeSubstanceFR);
+      setValue("ATCCode", selectedOption?.value?.ATCCode);
+      setValue(name, selectedOption?.value?.productCode);
+    } else if (name === "productCode") {
+      setValue("productName", selectedOption?.value?.productName);
+      setValue("productType", selectedOption?.value?.productType);
+      setValue("activeSubstanceEN", selectedOption?.value?.activeSubstanceEN);
+      setValue("activeSubstanceFR", selectedOption?.value?.activeSubstanceFR);
+      setValue("ATCCode", selectedOption?.value?.ATCCode);
+      setValue(name, selectedOption?.value?.productCode);
+    } else if (name === "milestonesOverview") {
+      milestoneChangeHandler(selectedOption?.value);
+    } else {
+      setValue(name, selectedOption?.value);
+    }
+
     clearErrors(name);
   };
 
@@ -36,11 +95,8 @@ export default function GenericInput({
       {type === "select" ? (
         <Select
           options={options || []}
-          {...register(name, { required: true })}
-          onChange={(selectedOption) => {
-            setValue(name, selectedOption?.value);
-            clearErrors(name);
-          }}
+          {...register(name, { required: isRequired })}
+          onChange={selectChangeHandler}
           isMulti={isMulti}
           defaultValue={
             Array.isArray(defaultValue)
@@ -62,7 +118,7 @@ export default function GenericInput({
           id={name}
           type="text"
           readOnly
-          {...register(name, { required: true })}
+          {...register(name, { required: isRequired })}
         />
       ) : type === "checkbox" ? (
         <Checkbox

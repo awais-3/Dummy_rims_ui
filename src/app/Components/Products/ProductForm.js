@@ -9,18 +9,29 @@ import {
   newProductFormFields,
 } from "../../assets/Data/index";
 import GenericInput from "../Common/Inputs/Input";
+import { addProduct } from "../../../lib/redux/slice/productSlice";
+import { addParentProduct } from "../../../lib/redux/slice/parentProductSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-const ProductForm = ({ isEditing = false, product = {}, type }) => {
+const ProductForm = ({ isEditing = false, product = {}, type, onClose }) => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     setValue,
     clearErrors,
     formState: { errors },
-  } = useForm();
+  } = useForm({});
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(type);
+    if (type === "New") {
+      dispatch(addProduct(data));
+    } else if (type === "Parent") {
+      dispatch(addParentProduct(data));
+      console.log(data);
+    }
+    onClose();
   };
 
   useEffect(() => {

@@ -7,24 +7,49 @@ import {
   Input,
   FormErrorMessage,
 } from "@chakra-ui/react";
-
+import { useDispatch } from "react-redux";
+import { addTemplate } from "../../../lib/redux/slice/formBuilderSlice";
 import FormSubHeder from "../Common/FormSubHeder";
-
 import { formBuilderFields } from "../../assets/Data";
 import GenericInput from "../Common/Inputs/Input";
 
-function FormBuilderForm({}) {
+function FormBuilderForm({ onClose }) {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     setValue,
     clearErrors,
-    watch,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const processedData = {};
+    let totalSelectedFields = 0;
+
+    formBuilderFields.forEach((section) => {
+      const selectedFields = Object.keys(data).filter((key) =>
+        section.fields.find((field) => field.name === key && data[key])
+      );
+
+      totalSelectedFields += selectedFields.length;
+
+      if (selectedFields.length > 0) {
+        processedData[section.sectionName] = {
+          fields: selectedFields,
+          selectedCount: selectedFields.length,
+        };
+      }
+    });
+
+    processedData.totalSelectedFields = totalSelectedFields;
+    processedData.templateName = data.templateName;
+
+    dispatch(
+      addTemplate({ ...processedData, usedInCount: 0, createdBy: "User" })
+    );
+    onClose();
+    console.log(processedData);
   };
 
   return (
@@ -45,6 +70,7 @@ function FormBuilderForm({}) {
           {errors["templateName"]?.message || "This field is required"}
         </FormErrorMessage>
       </FormControl>
+
       {formBuilderFields.map((section, index) => (
         <div key={index}>
           <FormSubHeder heading={section?.sectionName} />

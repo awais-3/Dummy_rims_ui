@@ -45,7 +45,12 @@ export default function ProductDrawer({
           <Divider borderColor="blue.500" borderWidth={1} bg="blue" />
 
           <DrawerBody>
-            <ProductForm type={type} isEditing={isEditing} product={product} />
+            <ProductForm
+              type={type}
+              isEditing={isEditing}
+              product={product}
+              onClose={onClose}
+            />
           </DrawerBody>
 
           <DrawerFooter
