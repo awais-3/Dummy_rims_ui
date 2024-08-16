@@ -2,18 +2,26 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import { useParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../../Components/Navbar/navbar";
 import ProcedureDetails from "../../Components/Procedure/EditProcedure/ProcedureDetails";
 import ProcedureTimeline from "../../Components/Procedure/ProcedureTimeline/ProcedureTimeline";
-import ProcedureTimeline1 from "../../Components/Procedure/ProcedureTimeline/ProcedureTimeline1";
-import ProcedureTimeline2 from "../../Components/Procedure/ProcedureTimeline/ProcedureTimeline2";
-import ProcedureTimeline3 from "../../Components/Procedure/ProcedureTimeline/ProcedureTimeline3";
+import { useSelector } from "react-redux";
 
 export default function Page() {
   const { id } = useParams();
   const router = useRouter();
+  const [seletectProcedure, setseletectedProcedure] = useState(null);
   const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const selectedProcedure = procedures.find(
+      (procedure) => String(procedure.id) === id
+    );
+    setseletectedProcedure(selectedProcedure);
+  }, [id]);
+
+  const procedures = useSelector((state) => state.procedure.procedures);
 
   const [currentFilter, setCurrentFilter] = useState(
     searchParams.get("current_filter") || "Project Details"
@@ -21,9 +29,9 @@ export default function Page() {
 
   const handleFilterChange = (newFilter) => {
     setCurrentFilter(newFilter);
-    const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set("current_filter", newFilter);
-    router.push(`/procedures/1/?${newSearchParams.toString()}`);
+    // const newSearchParams = new URLSearchParams(searchParams);
+    // newSearchParams.set("current_filter", newFilter);
+    // router.push(`/procedures/1/?${newSearchParams.toString()}`);
   };
 
   return (
@@ -74,10 +82,7 @@ export default function Page() {
                 <ProcedureDetails />
               </TabPanel>
               <TabPanel>
-                <ProcedureTimeline />
-                <ProcedureTimeline1 />
-                <ProcedureTimeline2 />
-                <ProcedureTimeline3 />
+                <ProcedureTimeline procedure={seletectProcedure} />
               </TabPanel>
             </TabPanels>
           </Tabs>

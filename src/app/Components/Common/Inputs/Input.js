@@ -82,6 +82,7 @@ export default function GenericInput({
       setValue(name, selectedOption?.value?.productCode);
     } else if (name === "milestonesOverview") {
       milestoneChangeHandler(selectedOption?.value);
+      setValue(name, selectedOption?.value?.milestoneName);
     } else {
       setValue(name, selectedOption?.value);
     }

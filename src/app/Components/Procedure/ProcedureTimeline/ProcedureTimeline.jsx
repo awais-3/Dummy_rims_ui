@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   chakra,
@@ -7,40 +7,106 @@ import {
   HStack,
   VStack,
   Flex,
-  useColorModeValue,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
-const milestones = [
-  {
-    year: "",
-    title: "Dossier Sent",
-    description: "Description for Dossier Sent",
-    isActive: false,
-  },
-  {
-    year: "",
-    title: "Dossier Submitted",
-    description: "Description for Dossier Submitted",
-    isActive: false,
-  },
-  {
-    year: "",
-    title: "Samples Sent",
-    description: "Description for Samples Sent",
-    isActive: false,
-  },
-  {
-    year: "",
-    title: "Payment",
-    description: "Description for Payment",
-    isActive: false,
-  },
-];
+// const milestones = [
+//   {
+//     year: "",
+//     title: "Dossier Sent",
+//     description: "Description for Dossier Sent",
+//     isActive: false,
+//   },
+//   {
+//     year: "",
+//     title: "Dossier Submitted",
+//     description: "Description for Dossier Submitted",
+//     isActive: false,
+//   },
+//   {
+//     year: "",
+//     title: "Samples Sent",
+//     description: "Description for Samples Sent",
+//     isActive: false,
+//   },
+//   {
+//     year: "",
+//     title: "Payment",
+//     description: "Description for Payment",
+//     isActive: false,
+//   },
+// ];
 
-const Milestones = () => {
+const Milestones = ({ procedure }) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const isDesktop = useBreakpointValue({ base: false, md: true });
+  const [milestones, setMilestones] = useState([]);
+  const allMilestones = useSelector((state) => state.milestone.milestones);
+
+  useEffect(() => {
+    if (procedure?.milestonesOverview) {
+      const selectedMilestoneInProcedure = allMilestones.find(
+        (mile) => String(mile?.milestoneName) === procedure?.milestonesOverview
+      );
+
+      if (selectedMilestoneInProcedure) {
+        // Destructure to remove unnecessary keys
+        const {
+          createdBy,
+          id,
+          milestoneCount,
+          milestoneName,
+          usedInCount,
+          ...filteredMilestone
+        } = selectedMilestoneInProcedure;
+
+        // Initialize all fields to null
+        const initializedMilestone = Object.keys(filteredMilestone).reduce(
+          (acc, key) => {
+            acc[key] = null;
+            return acc;
+          },
+          {}
+        );
+
+        // Update fields with values from the procedure, if they exist
+        const updatedMilestone = Object.entries(initializedMilestone).reduce(
+          (acc, [key, value]) => {
+            acc[key] = procedure[key] !== undefined ? procedure[key] : "";
+            return acc;
+          },
+          {}
+        );
+
+        const updatedMilestonesArray = Object.entries(updatedMilestone).map(
+          ([key, value]) => {
+            let isActive = false;
+
+            // Handle FileList specifically
+            if (value instanceof FileList) {
+              isActive = value.length > 0;
+            } else {
+              // Handle other cases: check if the value is not an empty string or undefined
+              isActive = value !== "" && value !== undefined;
+            }
+
+            return {
+              title: key,
+              year: value,
+              isActive: isActive,
+            };
+          }
+        );
+
+        setMilestones(updatedMilestonesArray);
+      } else {
+        setMilestones([]);
+      }
+    } else {
+      setMilestones([]);
+    }
+  }, [procedure, allMilestones]);
 
   return (
     <Container maxWidth="7xl" p={{ base: 2, sm: 10 }}>
@@ -78,6 +144,12 @@ const Milestones = () => {
 };
 
 const Card = ({ year, title, description, isActive }) => {
+  const formatTitle = (key) => {
+    return key
+      .replace(/([a-z])([A-Z])/g, "$1 $2") // Add space before capital letters
+      .replace(/([A-Z])/g, (match) => match.charAt(0).toUpperCase()) // Capitalize the first letter of each word
+      .replace(/^\w/, (match) => match.toUpperCase()); // Capitalize the first letter of the title
+  };
   return (
     <HStack
       flex={1}
@@ -94,10 +166,15 @@ const Card = ({ year, title, description, isActive }) => {
         </Text>
 
         <VStack spacing={2} mb={3} textAlign="left">
-          <chakra.h1 fontSize="2xl" lineHeight={1.2} fontWeight="bold" w="100%">
-            {title}
-          </chakra.h1>
-          <Text fontSize="md">{description}</Text>
+          <Box
+            fontSize={["12px", "14px", "14px", "16px"]}
+            whiteSpace={"wrap"}
+            lineHeight={1.2}
+            fontWeight="bold"
+            w="100%"
+          >
+            {formatTitle(title)}
+          </Box>
         </VStack>
       </Box>
     </HStack>

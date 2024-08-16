@@ -16,7 +16,6 @@ export default function ProcedureTable() {
   const dispatch = useDispatch();
   const procedures = useSelector((state) => state.procedure.procedures);
   const [selectedRows, setSelectedRows] = React.useState([]);
-
   const handleDeleteSelectedRows = () => {
     dispatch(removeProcedures(selectedRows));
     setSelectedRows([]);
