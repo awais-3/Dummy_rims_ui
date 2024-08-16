@@ -13,28 +13,28 @@ import {
 
 const milestones = [
   {
-    year: "",
+    year: "27-02-2021",
     title: "Dossier Sent",
     description: "Description for Dossier Sent",
-    isActive: false,
+    isActive: true,
   },
   {
-    year: "",
+    year: "13-11-2013",
     title: "Dossier Submitted",
     description: "Description for Dossier Submitted",
-    isActive: false,
+    isActive: true,
   },
   {
-    year: "",
+    year: "03-07-2023",
     title: "Samples Sent",
     description: "Description for Samples Sent",
-    isActive: false,
+    isActive: true,
   },
   {
-    year: "",
+    year: "23-12-2012",
     title: "Payment",
     description: "Description for Payment",
-    isActive: false,
+    isActive: true,
   },
 ];
 

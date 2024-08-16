@@ -6,6 +6,9 @@ import { useState } from "react";
 import Navbar from "../../Components/Navbar/navbar";
 import ProcedureDetails from "../../Components/Procedure/EditProcedure/ProcedureDetails";
 import ProcedureTimeline from "../../Components/Procedure/ProcedureTimeline/ProcedureTimeline";
+import ProcedureTimeline1 from "../../Components/Procedure/ProcedureTimeline/ProcedureTimeline1";
+import ProcedureTimeline2 from "../../Components/Procedure/ProcedureTimeline/ProcedureTimeline2";
+import ProcedureTimeline3 from "../../Components/Procedure/ProcedureTimeline/ProcedureTimeline3";
 
 export default function Page() {
   const { id } = useParams();
@@ -72,6 +75,9 @@ export default function Page() {
               </TabPanel>
               <TabPanel>
                 <ProcedureTimeline />
+                <ProcedureTimeline1 />
+                <ProcedureTimeline2 />
+                <ProcedureTimeline3 />
               </TabPanel>
             </TabPanels>
           </Tabs>

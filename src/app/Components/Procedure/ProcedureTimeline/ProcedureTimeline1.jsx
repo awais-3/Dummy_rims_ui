@@ -13,10 +13,10 @@ import {
 
 const milestones = [
   {
-    year: "",
+    year: "27-02-2021",
     title: "Dossier Sent",
     description: "Description for Dossier Sent",
-    isActive: false,
+    isActive: true,
   },
   {
     year: "",
