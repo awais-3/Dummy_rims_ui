@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Navbar from "../../Components/Navbar/navbar";
 import ProcedureDetails from "../../Components/Procedure/EditProcedure/ProcedureDetails";
+import ProcedureTimeline from "../../Components/Procedure/ProcedureTimeline/ProcedureTimeline";
 
 export default function Page() {
   const { id } = useParams();
@@ -19,7 +20,7 @@ export default function Page() {
     setCurrentFilter(newFilter);
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set("current_filter", newFilter);
-    router.push(`/milestones/1/?${newSearchParams.toString()}`);
+    router.push(`/procedures/1/?${newSearchParams.toString()}`);
   };
 
   return (
@@ -40,7 +41,7 @@ export default function Page() {
             flexDirection="column"
             index={currentFilter === "Project Details" ? 0 : 1}
             onChange={(index) =>
-              handleFilterChange(index === 0 ? "Project Details" : "Document")
+              handleFilterChange(index === 0 ? "Project Details" : "Timeline")
             }
           >
             <TabList mb="1em" flexDirection={"column"} p="4" mt="4">
@@ -51,13 +52,13 @@ export default function Page() {
               >
                 Procedure Details
               </Tab>
-              {/* <Tab
-                value="Document"
+              <Tab
+                value="Timeline"
                 _selected={{ color: "white", bg: "blue.500" }}
                 py="4"
               >
-                Document
-              </Tab> */}
+                Timeline
+              </Tab>
             </TabList>
           </Tabs>
         </Box>
@@ -68,6 +69,9 @@ export default function Page() {
             <TabPanels>
               <TabPanel>
                 <ProcedureDetails />
+              </TabPanel>
+              <TabPanel>
+                <ProcedureTimeline />
               </TabPanel>
             </TabPanels>
           </Tabs>
