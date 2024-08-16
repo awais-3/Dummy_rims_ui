@@ -61,6 +61,16 @@ const Milestones = ({ procedure }) => {
           ...filteredMilestone
         } = selectedMilestoneInProcedure;
 
+        // Manually add specific fields to the filtered milestone
+        const requiredFields = {
+          dossierSent: "",
+          dossierSubmitted: "",
+          samplesSent: "",
+          payment: "",
+        };
+
+        Object.assign(filteredMilestone, requiredFields);
+
         // Initialize all fields to null
         const initializedMilestone = Object.keys(filteredMilestone).reduce(
           (acc, key) => {
@@ -73,7 +83,9 @@ const Milestones = ({ procedure }) => {
         // Update fields with values from the procedure, if they exist
         const updatedMilestone = Object.entries(initializedMilestone).reduce(
           (acc, [key, value]) => {
-            acc[key] = procedure[key] !== undefined ? procedure[key] : "";
+            acc[key] =
+              procedure && procedure[key] !== undefined ? procedure[key] : "";
+
             return acc;
           },
           {}
@@ -104,7 +116,42 @@ const Milestones = ({ procedure }) => {
         setMilestones([]);
       }
     } else {
-      setMilestones([]);
+      const requiredFields = {
+        dossierSent: "",
+        dossierSubmitted: "",
+        samplesSent: "",
+        payment: "",
+      };
+
+      const updatedMilestone = Object.entries(requiredFields).reduce(
+        (acc, [key, value]) => {
+          acc[key] =
+            procedure && procedure[key] !== undefined ? procedure[key] : "";
+
+          return acc;
+        },
+        {}
+      );
+
+      const updatedMilestonesArray = Object.entries(updatedMilestone).map(
+        ([key, value]) => {
+          let isActive = false;
+
+          if (value instanceof FileList) {
+            isActive = value.length > 0;
+          } else {
+            isActive = value !== "" && value !== undefined;
+          }
+
+          return {
+            title: key,
+            year: value,
+            isActive: isActive,
+          };
+        }
+      );
+
+      setMilestones(updatedMilestonesArray || []);
     }
   }, [procedure, allMilestones]);
 
