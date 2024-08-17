@@ -91,15 +91,13 @@ const Milestones = ({ procedure }) => {
           {}
         );
 
-        const updatedMilestonesArray = Object.entries(updatedMilestone).map(
-          ([key, value]) => {
+        const updatedMilestonesArray = Object.entries(updatedMilestone)
+          .map(([key, value]) => {
             let isActive = false;
 
-            // Handle FileList specifically
             if (value instanceof FileList) {
               isActive = value.length > 0;
             } else {
-              // Handle other cases: check if the value is not an empty string or undefined
               isActive = value !== "" && value !== undefined;
             }
 
@@ -108,8 +106,8 @@ const Milestones = ({ procedure }) => {
               year: value,
               isActive: isActive,
             };
-          }
-        );
+          })
+          .sort((a, b) => (b.isActive ? 1 : 0) - (a.isActive ? 1 : 0));
 
         setMilestones(updatedMilestonesArray);
       } else {
@@ -132,9 +130,8 @@ const Milestones = ({ procedure }) => {
         },
         {}
       );
-
-      const updatedMilestonesArray = Object.entries(updatedMilestone).map(
-        ([key, value]) => {
+      const updatedMilestonesArray = Object.entries(updatedMilestone)
+        .map(([key, value]) => {
           let isActive = false;
 
           if (value instanceof FileList) {
@@ -148,8 +145,8 @@ const Milestones = ({ procedure }) => {
             year: value,
             isActive: isActive,
           };
-        }
-      );
+        })
+        .sort((a, b) => (b.isActive ? 1 : 0) - (a.isActive ? 1 : 0));
 
       setMilestones(updatedMilestonesArray || []);
     }
