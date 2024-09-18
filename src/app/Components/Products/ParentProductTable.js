@@ -53,6 +53,11 @@ export default function ParentProductTable() {
       width: 200,
     },
     {
+      field: "maHolder",
+      headerName: "MA Holder",
+      width: 200,
+    },
+    {
       field: "activeSubstanceFR",
       headerName: "Active Substance FR",
       width: 200,

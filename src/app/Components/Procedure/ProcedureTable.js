@@ -56,7 +56,7 @@ export default function ProcedureTable() {
       headerName: "Actions",
       width: 150,
       renderCell: (params) => (
-        <Box display="flex" gap="2">
+        <div display="flex" gap="2">
           <IconButton
             aria-label="edit"
             color="primary"
@@ -71,7 +71,7 @@ export default function ProcedureTable() {
           >
             <MdDeleteOutline />
           </IconButton>
-        </Box>
+        </div>
       ),
     },
   ];

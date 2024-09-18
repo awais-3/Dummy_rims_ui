@@ -3,25 +3,15 @@ import React from "react";
 import ProjectRow from "./ProjectRow";
 
 const Projects = [
-  { name: "Atorvastatin" },
-  { name: "Metformin" },
-  { name: "Levothyroxine" },
-  { name: "Lisinopril" },
-  { name: "Amlodipine" },
-  { name: "Metoprolol" },
-  { name: "Albuterol" },
-  { name: "Losartan" },
-  { name: "Omeprazole" },
-  { name: "Sertraline" },
-  { name: "Hydrochlorothiazide" },
-  { name: "Rosuvastatin" },
-  // { name: "Montelukast" },
-  // { name: "Escitalopram" },
-  // { name: "Simvastatin" },
-  // { name: "Bupropion" },
-  // { name: "Pantoprazole" },
-  // { name: "Acetaminophen; Hydrocodone" },
-  // { name: "Furosemide" },
+  { name: "SDCEFIV1A" },
+  { name: "STICT5A" },
+  { name: "XSC-EFLOT15A" },
+  { name: "XSC-NELT5A" },
+  { name: "XSK-MAL50A" },
+  { name: "XSK-MALJ250A" },
+  { name: "LRIVT15A" },
+  { name: "XPH-XPLET5A" },
+  { name: "XPH-XILC15A" },
 ];
 
 export default function ProjectList() {
@@ -30,13 +20,14 @@ export default function ProjectList() {
       <Box
         fontSize={{ base: "18px", md: "20px", lg: "20px" }}
         bg="blue.600"
+        fontWeight={600}
         textAlign="center"
         color=" white"
         py={{ base: "2", md: "3" }}
         borderTopLeftRadius="md"
         borderTopRightRadius="md"
       >
-        Active Products
+        Products
       </Box>
       <Box
         maxH="600px"

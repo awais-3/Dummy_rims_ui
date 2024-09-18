@@ -3,26 +3,15 @@ import React from "react";
 import RaRow from "./RaRow";
 
 const RA = [
-  { name: "Hospital A" },
-  { name: "Clinic B" },
-  { name: "Pharmacy Chain C" },
-  { name: "Healthcare System D" },
-  { name: "Medical Group E" },
-  { name: "Research Institute F" },
-  { name: "Specialist Group G" },
-  { name: "Urgent Care Center H" },
-  { name: "Telemedicine Provider I" },
-  { name: "Government Healthcare Agency J" },
-  { name: "Philanthropic Organization K" },
-  { name: "Community Health Center L" },
-  // { name: "Independent Pharmacy M" },
-  // { name: "Mental Health Clinic N" },
-  // { name: "Dental Practice O" },
-  // { name: "Veterinary Clinic P" },
-  // { name: "Nursing Home Q" },
-  // { name: "Biotechnology Company R" },
-  // { name: "Medical Device Manufacturer S" },
-  // { name: "Health Insurance Provider T" },
+  { name: "N – SDCEFIV1A – MALI" },
+  { name: "V – SCETIM1B – DRC" },
+  { name: "N – XSC-NELTA – DRC" },
+  { name: "N – LRIVT15A – RW" },
+  { name: "V – XPH-XPLET5A – BJ" },
+  { name: "V – XPH-XPLET5A – CG" },
+  { name: "N – SDCEFIV1A – CM" },
+  { name: "N – SDCEFIV1A – BJ" },
+  { name: "N – XSC-NELTA – KE" },
 ];
 
 export default function RaList() {
@@ -30,6 +19,7 @@ export default function RaList() {
     <Box flexGrow="1" flex="1" rounded="md">
       <Box
         fontSize={{ base: "18px", md: "20px", lg: "20px" }}
+        fontWeight={600}
         bg="blue.600"
         textAlign="center"
         color=" white"
@@ -37,7 +27,7 @@ export default function RaList() {
         borderTopLeftRadius="md"
         borderTopRightRadius="md"
       >
-        Active Procedures
+        Procedures
       </Box>
       <Box
         maxH="600px"

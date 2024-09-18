@@ -19,37 +19,39 @@ const fetchProcedure = async () => {
   newProcedure["Procedure Milestones"] = {};
   newProcedure["Manufacturer"] = {};
 
-  newProcedure["General Information"]["procedureType"] = "Type A";
-  newProcedure["General Information"]["country"] = "Country X";
-  newProcedure["General Information"]["authorisationStatus"] = "Approved";
-  newProcedure["General Information"]["maNumber"] = "MA12345";
-  newProcedure["General Information"]["maHolder"] = "Autofilled Company";
-  newProcedure["General Information"]["maDate"] = "2023-01-15";
-  newProcedure["General Information"]["maExpiryDate"] = "2028-01-15";
-  newProcedure["General Information"]["parentMANumber"] = "ParentMA6789";
-  newProcedure["General Information"]["parentMADate"] = "2020-06-30";
+  newProcedure["General Information"]["procedureType"] = "NEW";
+  newProcedure["General Information"]["country"] = "Mali";
+  newProcedure["General Information"]["authorisationStatus"] = "PENDING";
+  newProcedure["General Information"]["maNumber"] = "";
+  newProcedure["General Information"]["maHolder"] = "DAFRA PHARMA GmbH";
+  newProcedure["General Information"]["maDate"] = "";
+  newProcedure["General Information"]["maExpiryDate"] = "";
+  newProcedure["General Information"]["parentMANumber"] = "";
+  newProcedure["General Information"]["parentMADate"] = "";
 
-  newProcedure["Product Information"]["productCode"] = "P123";
-  newProcedure["Product Information"]["productType"] = "Type A";
-  newProcedure["Product Information"]["productName"] = "Product XYZ";
-  newProcedure["Product Information"]["genericName"] = "Generic XYZ";
-  newProcedure["Product Information"]["strength"] = "10mg";
-  newProcedure["Product Information"]["pharmaceuticalForm"] = "Tablet";
-  newProcedure["Product Information"]["packSize"] = "30 tablets";
-  newProcedure["Product Information"]["pght"] = "Details of PGHT";
-  newProcedure["Product Information"]["shelfLife"] = "2 years";
+  newProcedure["Product Information"]["productCode"] = "SDCEFIV1";
+  newProcedure["Product Information"]["productType"] = "LISTE 1";
+  newProcedure["Product Information"]["productName"] = "DAFRACEF IV";
+  newProcedure["Product Information"]["genericName"] = "Cefriaxone";
+  newProcedure["Product Information"]["strength"] = "1000mg";
+  newProcedure["Product Information"]["pharmaceuticalForm"] =
+    "Powder for solution for injection + solvent";
+  newProcedure["Product Information"]["packSize"] = "1 vial";
+  newProcedure["Product Information"]["pght"] = "865";
+  newProcedure["Product Information"]["shelfLife"] = "3 years";
   newProcedure["Product Information"]["storageConditions"] =
     "Store in cool, dry place";
 
-  newProcedure["Procedure Milestones"]["dossierSent"] = "2023-03-15";
-  newProcedure["Procedure Milestones"]["dossierSubmitted"] = "2023-04-20";
-  newProcedure["Procedure Milestones"]["samplesSent"] = "2023-05-25";
-  newProcedure["Procedure Milestones"]["samplePONumber"] = "PO123456";
-  newProcedure["Procedure Milestones"]["payment"] = "2023-06-30";
-  newProcedure["Procedure Milestones"]["paymentReference"] = "Ref123456";
-  newProcedure["Procedure Milestones"]["milestonesOverview"] = "In progress";
+  newProcedure["Procedure Milestones"]["dossierSent"] = "";
+  newProcedure["Procedure Milestones"]["dossierSubmitted"] = "";
+  newProcedure["Procedure Milestones"]["samplesSent"] = "";
+  newProcedure["Procedure Milestones"]["samplePONumber"] = "";
+  newProcedure["Procedure Milestones"]["payment"] = "";
+  newProcedure["Procedure Milestones"]["paymentReference"] = "";
+  newProcedure["Procedure Milestones"]["milestonesOverview"] = "";
 
-  newProcedure["Manufacturer"]["manufacturingSiteFinishedProduct"] = "Site A";
+  newProcedure["Manufacturer"]["manufacturingSiteFinishedProduct"] =
+    "ANFARM HELLAS";
   newProcedure["Manufacturer"]["manufacturingSiteFPAddress"] = "Address A";
   newProcedure["Manufacturer"]["manufacturingSiteFPTelephoneNumber"] =
     "123-456-7890";
@@ -59,7 +61,8 @@ const fetchProcedure = async () => {
     "2025-12-31";
   newProcedure["Manufacturer"]["manufacturingSiteFPMLExpiryDate"] =
     "2026-12-31";
-  newProcedure["Manufacturer"]["batchReleaseSiteFinishedProduct"] = "Site B";
+  newProcedure["Manufacturer"]["batchReleaseSiteFinishedProduct"] =
+    "ANFARM HELLAS";
   newProcedure["Manufacturer"]["batchReleaseSiteFPAddress"] = "Address B";
   newProcedure["Manufacturer"]["batchReleaseSiteFPTelephoneNumber"] =
     "987-654-3210";
@@ -67,10 +70,10 @@ const fetchProcedure = async () => {
   newProcedure["Manufacturer"]["batchReleaseSiteFPGMPExpiryDate"] =
     "2025-12-31";
   newProcedure["Manufacturer"]["batchReleaseSiteFPMLExpiryDate"] = "2026-12-31";
-  newProcedure["Manufacturer"]["apiManufacturer"] = "Manufacturer X";
+  newProcedure["Manufacturer"]["apiManufacturer"] = "ACS DOBFAR";
   newProcedure["Manufacturer"]["apiManufacturerAddress"] =
     "Manufacturer Address";
-  newProcedure["Manufacturer"]["api"] = "API Details";
+  newProcedure["Manufacturer"]["api"] = "Ceftriaxone";
   newProcedure["Manufacturer"]["apiManufacturerGMPExpiryDate"] = "2025-12-31";
   newProcedure["Manufacturer"]["apiManufacturerMLExpiryDate"] = "2026-12-31";
 

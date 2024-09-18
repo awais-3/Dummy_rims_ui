@@ -3,25 +3,15 @@ import React from "react";
 import ClientRow from "./ClientRow";
 
 const Clients = [
-  { name: "Pfizer" },
-  { name: "Merck & Co." },
-  { name: "AbbVie" },
-  { name: "Novartis" },
-  { name: "Roche Pharmaceuticals (division of Roche Group)" },
-  { name: "Bristol Myers Squibb" },
-  { name: "Sanofi" },
+  { name: "DAFRA" },
+  { name: "LUX" },
+  { name: "S KANT" },
+  { name: "Pharmevo" },
+  { name: "Scilife" },
+  { name: "Swiss" },
+  { name: "Bilim" },
   { name: "AstraZeneca" },
-  { name: "GSK" },
-  { name: "Takeda Pharmaceutical" },
-  { name: "Eli Lilly" },
-  { name: "Gilead Sciences" },
-  // { name: "Amgen" },
-  // { name: "Novo Nordisk" },
-  // { name: "Amgen" },
-  // { name: "Bayer (Pharmaceuticals Division)" },
-  // { name: "Boehringer Ingelheim" },
-  // { name: "Moderna" },
-  // { name: "BioNTech" },
+  { name: "" },
 ];
 
 export default function ClientList() {
@@ -30,13 +20,14 @@ export default function ClientList() {
       <Box
         fontSize={{ base: "18px", md: "20px", lg: "20px" }}
         bg="blue.600"
+        fontWeight={600}
         textAlign="center"
         color=" white"
         py={{ base: "2", md: "3" }}
         borderTopLeftRadius="md"
         borderTopRightRadius="md"
       >
-        Active Contacts
+        Partners
       </Box>
       <Box
         maxH="600px"
