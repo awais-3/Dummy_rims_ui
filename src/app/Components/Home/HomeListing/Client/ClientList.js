@@ -8,9 +8,9 @@ const Clients = [
   { name: "S KANT" },
   { name: "Pharmevo" },
   { name: "Scilife" },
+  { name: "" },
   { name: "Swiss" },
   { name: "Bilim" },
-  { name: "AstraZeneca" },
   { name: "" },
 ];
 
@@ -26,6 +26,7 @@ export default function ClientList() {
         py={{ base: "2", md: "3" }}
         borderTopLeftRadius="md"
         borderTopRightRadius="md"
+        textTransform="uppercase"
       >
         Partners
       </Box>

@@ -26,6 +26,7 @@ export default function RaList() {
         py={{ base: "2", md: "3" }}
         borderTopLeftRadius="md"
         borderTopRightRadius="md"
+        textTransform="uppercase"
       >
         Procedures
       </Box>

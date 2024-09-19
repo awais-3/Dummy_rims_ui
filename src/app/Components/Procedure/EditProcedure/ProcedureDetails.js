@@ -48,7 +48,8 @@ const fetchProcedure = async () => {
   newProcedure["Procedure Milestones"]["samplePONumber"] = "";
   newProcedure["Procedure Milestones"]["payment"] = "";
   newProcedure["Procedure Milestones"]["paymentReference"] = "";
-  newProcedure["Procedure Milestones"]["milestonesOverview"] = "";
+  newProcedure["Procedure Milestones"]["milestonesOverview"] =
+    "Dossier prepared";
 
   newProcedure["Manufacturer"]["manufacturingSiteFinishedProduct"] =
     "ANFARM HELLAS";

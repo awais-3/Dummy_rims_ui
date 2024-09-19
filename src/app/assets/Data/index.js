@@ -86,7 +86,7 @@ export const parentProductData = [
     productCode: "XSC-EFLOT15",
     productName: "Eflozin tablet",
     activeSubstanceEN: "Empagliflozin",
-    activeSubstanceFR: "Empagliflozin",
+    activeSubstanceFR: "Empagliflozine",
     ATCCode: "A10BK03",
     productType: "LISTE 1",
     // maHolder: "Scilife",

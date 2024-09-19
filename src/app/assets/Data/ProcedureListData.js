@@ -26,8 +26,8 @@ export const ProcedureListData = [
   {
     id: 3,
     procedureType: "Renewal",
-    productCode: "IMI-LUX",
-    productName: "DAFRACEF IV",
+    productCode: "LIMIPIV5A",
+    productName: "IMI-LUX",
     genericName: "Imipenem / Cilastin ",
     strength: "500mg/500mg",
     pharmaceuticalForm: "Powder for solution for infusion",

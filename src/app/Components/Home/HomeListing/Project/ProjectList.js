@@ -26,6 +26,7 @@ export default function ProjectList() {
         py={{ base: "2", md: "3" }}
         borderTopLeftRadius="md"
         borderTopRightRadius="md"
+        textTransform="uppercase"
       >
         Products
       </Box>
