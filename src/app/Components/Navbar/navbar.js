@@ -141,7 +141,7 @@ export default function Navbar() {
                     <Icon as={GrUserAdmin} w={4} h={4} />
                     <Box fontWeight="semibold">Admin</Box>
                   </Flex>
-                  <Box>Nikki Proost</Box>
+                  <Box>Niki Proost</Box>
                   <Box>niki.proost@energiapharma.be</Box>
                 </Flex>
               </Flex>
