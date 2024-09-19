@@ -32,6 +32,7 @@ export default function ParentProductTable() {
     {
       field: "productCode",
       headerName: "Parent Product Code",
+      width: 200,
       renderCell: (params) => (
         <Link href={`/products/${params.row.productCode}`}>
           <Box

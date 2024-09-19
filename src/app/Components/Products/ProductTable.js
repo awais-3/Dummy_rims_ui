@@ -33,6 +33,7 @@ export default function ProductTable() {
     {
       field: "productCode",
       headerName: "Product Code",
+      width: 200,
       renderCell: (params) => (
         <Link href={`/products/${params.row.productCode}`}>
           <Box
