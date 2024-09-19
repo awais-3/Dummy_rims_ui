@@ -11,7 +11,7 @@ export default function WelcomeText() {
         letterSpacing="wide"
         textTransform="uppercase"
       >
-        Welcome Niki Proost,
+        Welcome Niki Proost
       </Text>
     </Box>
   );
