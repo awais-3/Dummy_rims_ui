@@ -46,7 +46,7 @@ export default function ProcedureTable() {
     {
       field: "pharmaceuticalForm",
       headerName: "Pharmaceutical Form",
-      width: 150,
+      width: 300,
     },
     { field: "packSize", headerName: "Pack Size", width: 150 },
     { field: "productType", headerName: "Product Type", width: 150 },

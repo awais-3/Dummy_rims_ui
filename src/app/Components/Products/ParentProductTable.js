@@ -51,12 +51,12 @@ export default function ParentProductTable() {
     {
       field: "activeSubstanceEN",
       headerName: "Active Substance EN",
-      width: 200,
+      width: 300,
     },
     {
       field: "activeSubstanceFR",
       headerName: "Active Substance FR",
-      width: 200,
+      width: 300,
     },
     { field: "ATCCode", headerName: "ATC Code", width: 200 },
     { field: "productType", headerName: "Product Type", width: 200 },
