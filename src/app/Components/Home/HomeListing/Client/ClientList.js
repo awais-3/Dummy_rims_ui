@@ -8,9 +8,9 @@ const Clients = [
   { name: "S KANT" },
   { name: "Pharmevo" },
   { name: "Scilife" },
-  { name: "" },
   { name: "Swiss" },
   { name: "Bilim" },
+  { name: "" },
   { name: "" },
 ];
 
